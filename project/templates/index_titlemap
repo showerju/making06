@@ -1,64 +1,154 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
+    <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
     <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-              crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="./style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <!-- JS -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
-    <title>간단한 지도 표시하기</title>
+    <title>휴게소를 먹다</title>
 
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xlkaszxuya"></script>
 
+    <style>
+        /* Add a black background color to the top navigation */
+        .topnav {
+            background-color: #333;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* Style the links inside the navigation bar */
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            text-align: center;
+        }
+
+        /* Change the color of links on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Add a color to the active/current link */
+        .topnav a.active {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        .header {
+            width: 1509px;
+            height: 487px;
+
+            text-align: left;
+
+            background-image: url("/static/title_image.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: auto;
+        }
+
+        .header h1 {
+            font-size: 100px;
+            font-weight: bold;
+            padding: 60px 270px;
+            line-height: 110px;
+            letter-spacing: 8px;
+            padding-bottom: 0px;
+        }
+
+        .search_position {
+            padding-left: 270px;
+            padding-top: 15px;
+        }
+
+        * {
+            box-sizing: content-box;
+        }
+
+        /* Style the search field */
+        form.example input[type=text] {
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid grey;
+            float: left;
+            width: 23%;
+            background: #f1f1f1;
+        }
+
+        /* Style the submit button */
+        form.example button {
+            float: left;
+            width: 3%;
+            padding: 10px;
+            background: #2196F3;
+            color: white;
+            font-size: 17px;
+            border: 1px solid grey;
+            border-left: none; /* Prevent double borders */
+            cursor: pointer;
+        }
+
+        form.example button:hover {
+            background: #0b7dda;
+        }
+
+        /* Clear floats */
+        form.example::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
 </head>
 
-<script>
-</script>
-
-<style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-        #map {
-          height: 100%;
-        }
-
-        /* Optional: Makes the sample page fill the window. */
-        html,
-        body {
-          height: 100%;
-          margin: 0;
-          padding: 0;
-        }
-
-</style>
-
 <body>
-    <div>
-        <p>출발지 <input id="origin"> &nbsp >>> &nbsp 도착지 <input id="destination"> <button id="find">경로찾기</button></p>
-    </div>
-    <div id="floating-panel">
-        <b>Mode of Travel: </b>
-        <select id="mode">
-            <option value="DRIVING">Driving</option>
-            <option value="WALKING">Walking</option>
-            <option value="BICYCLING">Bicycling</option>
-            <option value="TRANSIT">Transit</option>
-        </select>
-    </div>
-    <div id="map" style="width:60%;height:800px;"></div>
+<div class="topnav">
+    <a class="active" href="#메인화면">홈</a>
+    <a href="#제안하기">휴게소 추천하기</a>
+    <a href="#팀소개">팀소개</a>
+</div>
+<div class="header">
+    <h1>
+        <span style="color: indianred;font-weight: bolder">휴</span>게소를 <br>
+        <span style="color: indianred;font-weight: bolder">먹</span>다
+    </h1>
+    <div class="search_position">
+        <!-- Load icon library -->
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!--API script-->
-    <script>
+        <!-- The form -->
+        <form class="example" action="action_page.php">
+            <input type="text" placeholder="휴게소명을 입력하세요" name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+</div>
+<div>
+        <div id="map" style="width:60%;height:800px;"></div>
+</div>
+<script>
         <!--   마커를찍을장소     -->
         //추가 희망사항 메모
         //상하행 휴게소 아이콘 다르게 구분하기
@@ -99,9 +189,10 @@
             { num: "33", place:"안동휴게소(부산)", lat: 36.553146, lng: 128.641936 },
             { num: "34", place:"진영휴게소(순천)", lat: 35.280076, lng: 128.716002 },
             { num: "35", place:"산청휴게소(하남)", lat: 35.333518, lng: 127.939008 },
-            { num: "36", place:"통도사휴게소(부산)", lat: 35.488854, lng: 129.090771 }
-        ];
+            { num: "36", place:"통도사휴게소(부산)", lat: 35.488854, lng: 129.090771 },
 
+
+        ];
         <!--  지도 기본  -->
         //지도 기본설정
         var map = new naver.maps.Map('map', {
@@ -121,7 +212,11 @@
             });
         }
 
-        
-    </script>
+
+
+
+
+</script>
 </body>
+
 </html>
