@@ -19,7 +19,7 @@
 
     <title>간단한 지도 표시하기</title>
 
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xlkaszxuya"></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=[please insert key]"></script>
 
 </head>
 
