@@ -19,40 +19,34 @@
 <div id="map" style="width:700px;height:800px;margin: auto;"></div>
 
 <script>
+    var map = new naver.maps.Map('map', {
+            center: new naver.maps.LatLng(36.138626808096, 127.88858512205674),
+            zoom: 8
+        });
 
 
-var HOME_PATH = window.HOME_PATH || '.';
-var cityhall = new naver.maps.LatLng(37.5666805, 126.9784147),
-    map = new naver.maps.Map('map', {
-        center: cityhall,
-        zoom: 15
-    }),
-    marker = new naver.maps.Marker({
-        map: map,
-        position: cityhall
-    });
+var cityhall = new naver.maps.LatLng(37.5666805, 126.9784147);
+
+
 
 var contentString = [
-        '<div class="iw_inner">',
-        '   <h3>서울특별시청</h3>',
-        '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br />',
-        '       <img src="'+ HOME_PATH +'/img/example/hi-seoul.jpg" width="55" height="55" alt="서울시청" class="thumb" /><br />',
-        '       02-120 | 공공,사회기관 &gt; 특별,광역시청<br />',
-        '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
-        '   </p>',
-        '</div>'
-    ].join('');
+    '<div class="iw_inner">',
+    '   <h3>서울만남의관장휴게소(부산)</h3>',
+    '   <p><br>',
+    '       <img src="" width="" height="" alt="" class="" /><br>',
+    '       <br>',
+    '       <a href="https://goo.gl/maps/cbfS9oFhpNR43ebK7" target="_blank">휴게소더알아보기</a>',
+    '   </p>',
+    '</div>'
+].join('');
+
+var marker = new naver.maps.Marker({
+    map: map,
+    position: cityhall
+});
 
 var infowindow = new naver.maps.InfoWindow({
-    content: contentString,
-    maxWidth: 140,
-    backgroundColor: "#eee",
-    borderColor: "#2db400",
-    borderWidth: 5,
-    anchorSize: new naver.maps.Size(30, 30),
-    anchorSkew: true,
-    anchorColor: "#eee",
-    pixelOffset: new naver.maps.Point(20, -20)
+    content: contentString
 });
 
 naver.maps.Event.addListener(marker, "click", function(e) {
@@ -62,6 +56,39 @@ naver.maps.Event.addListener(marker, "click", function(e) {
         infowindow.open(map, marker);
     }
 });
+
+var cityhall2 = new naver.maps.LatLng( 37.33235674908861, 127.10479850461947);
+
+
+
+var contentString = [
+    '<div class="iw_inner">',
+    '   <h3>죽전휴게소(서울)</h3>',
+    '   <p><br>',
+    '       <img src="" width="" height="" alt="" class="" /><br>',
+    '       <br>',
+    '       <a href="https://www.google.com/maps/place/%EC%A3%BD%EC%A0%84%ED%9C%B4%EA%B2%8C%EC%86%8C+%EC%84%9C%EC%9A%B8%EB%B0%A9%ED%96%A5/@37.3323714,127.102609,17z/data=!3m1!4b1!4m5!3m4!1s0x357b59f3316f3217:0xf75eb345ee3c5209!8m2!3d37.3323714!4d127.1047977" target="_blank">휴게소더알아보기</a>',
+    '   </p>',
+    '</div>'
+].join('');
+
+var marker1 = new naver.maps.Marker({
+    map: map,
+    position: cityhall2
+});
+
+var infowindow1 = new naver.maps.InfoWindow({
+    content: contentString
+});
+
+naver.maps.Event.addListener(marker1, "click", function(e) {
+    if (infowindow1.getMap()) {
+        infowindow1.close();
+    } else {
+        infowindow1.open(map, marker1);
+    }
+});
+
 
 
 </script>
