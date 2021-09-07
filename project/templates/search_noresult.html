@@ -48,7 +48,7 @@
 
         /* Add a color to the active/current link */
         .topnav a.active {
-            background-color: #04AA6D;
+            background-color: orange;
             color: white;
         }
 
@@ -77,8 +77,8 @@
             position: static;
             text-align: center;
             margin: auto;
-            padding-top: 60px;
-            padding-bottom: 60px;
+            padding-top: 50px;
+            padding-bottom: 50px;
         }
 
         .noresult_btn {
@@ -96,7 +96,9 @@
             padding-top: 15px;
 
         }
-
+        .sorry_img {
+            margin-bottom: 30px;
+        }
         * {
             box-sizing: content-box;
         }
@@ -116,7 +118,7 @@
             float: left;
             width: 3%;
             padding: 10px;
-            background: #2196F3;
+            background: orange;
             color: white;
             font-size: 17px;
             border: 1px solid grey;
@@ -162,10 +164,11 @@
 </div>
 
 <div class="noresult">
+    <img src="../static/sorry.png" class="sorry_img">
     <h2>죄송합니다 <br> 찾으시는 휴게소에 대한 정보가 없습니다.</h2>
     <div class="noresult_btn">
-        <button type="button" class="btn btn-outline-primary margin_right">돌아가기</button>
-        <button type="button" class="btn btn-primary">추천하기</button>
+        <button type="button" class="btn btn-outline-warning margin_right">돌아가기</button>
+        <button type="button" class="btn btn-warning">추천하기</button>
     </div>
 </div>
 
