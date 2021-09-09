@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
+<head>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>마이 페이보릿 무비스타 | 프론트-백엔드 연결 마지막 예제!</title>
+
+        <title>취합 데이터 한눈에보기 card</title>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"/>
         <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <style>
     .wrap{
-            width: 1500px;
+            width: 90%;
             margin: auto;
         }
 
@@ -21,15 +23,28 @@
 
         .card {
             float:left;
-            width: 20%;
+            width: 26%;
             border: 1px solid lightgray;
             margin-left: 20px;
             margin-bottom: 10px;
-            height: 600px;
+            height: 760px;
         }
-        .card-text{
-            padding: 20px 20px 5px 20px;
+        .card_text {
+            padding: 20px 25px 5px 25px;
         }
+
+        .card_image {
+            width: 100%;
+            height: 350px;
+        }
+
+        .hr_style {
+            margin: 15px auto;
+            background: #cbcbcb;
+            height: 1px;
+
+        }
+
 
 </style>
 <script>
@@ -58,33 +73,51 @@
                             console.log(menu,price,menu_info,name,number,address,score,url,menu_image)
 
                             let temp_html=`<div class="card">
-                <img src="${menu_image}" alt="이미지없음"/>
-                <div class="card-text">
-
-                    <p>${menu}&nbsp${price}</p>
-                    <p>${menu_info}</p>
-                    <p>휴게소: ${name}</p>
-                    <p>주소: ${address}</p>
-                    <P>연락처: ${number}</P>
-                    <p>별점: ${score}</p>
-                    <span>더 알고 싶다면?</span><a href="${url}">상세보기</a>
-                </div>
-            </div>`
-           $('#card_box').append(temp_html)
-                            }
+                                                <img class="card_image" src="${menu_image}" alt="이미지없음"/>
+                                                <div class="card_text">
+                                                    <p style="font-size: 25px; font-weight: bold;">${menu}&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">${price}원</span></p>
+                                                    <hr class="hr_style">
+                                                    <p>${menu_info}</p>
+                                                    <hr class="hr_style">
+                                                    <div style="line-height: 28px">
+                                                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal">&nbsp&nbsp${name}</span></p>
+                                                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소:<span style="font-weight: normal">&nbsp&nbsp${address}</span></p>
+                                                        <p style="font-weight: bold">연락처:<span style="font-weight: normal">&nbsp&nbsp${number}</span></P>
+                                                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점:<span style="font-weight: normal">&nbsp&nbsp${score}</span></p>
+                                                    </div>
+                                                    <hr class="hr_style">
+                                                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="${url}"> 상세보기</a>
+                                                </div>
+                                            </div>`
+                            $('#card_box').append(temp_html)
+                        }
                     }
-
                 });
-                }
+           }
 
 </script>
-    </head>
+</head>
 <body>
 <div class='wrap'>
         <div class="box_card" id="card_box">
-
+            <div class="card">
+                <img class="card_image" src="https://me2.kr/z8lz7" alt="이미지없음"/>
+                <div class="card_text">
+                    <p style="font-size: 25px; font-weight: bold;">순두부청국장&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">7,000원</span></p>
+                    <hr class="hr_style">
+                    <p>직접 만든 순두부로 맛과 영양을 잡았다! 옥산 순두부 청국장 냄새도 심하지 않고 간도 세지 않아 먹기 좋다 심지어 속도 편해 안 먹을 수가 없다!</p>
+                    <hr class="hr_style">
+                    <div style="line-height: 28px">
+                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp옥산휴게소 (부산방향)</span></p>
+                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp충북 청주시 흥덕구 옥산면 경부고속도로 309</span></p>
+                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp063-260-1053</span></P>
+                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>
+                    </div>
+                    <hr class="hr_style">
+                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/Go1XjzaqC96Dqx1Z7"> 상세보기</a>
+                </div>
+            </div>
         </div>
 </div>
-
 </body>
 </html>
