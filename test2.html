@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>마이 페이보릿 무비스타 | 프론트-백엔드 연결 마지막 예제!</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"/>
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<style>
+    .wrap{
+            width: 1500px;
+            margin: auto;
+        }
+
+    .box_card {
+            width: 100%;
+            margin: auto auto auto 5px;
+            /*  card float의 margin-left가 10px 씩 두번이니까 20px를 줘봤더니 맞았음  */
+        }
+
+        .card {
+            float:left;
+            width: 20%;
+            border: 1px solid lightgray;
+            margin-left: 20px;
+            margin-bottom: 10px;
+            height: 600px;
+        }
+        .card-text{
+            padding: 20px 20px 5px 20px;
+        }
+
+</style>
+<script>
+     $(document).ready(function () {
+                showStar();
+            });
+
+            function showStar() {
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/list',
+                    data: {},
+                    success: function (response) {
+                        let popstars = response['pop_star']
+                        console.log(popstars)
+                        for(let i = 0; i < popstars.length; i ++) {
+                            let menu = popstars[i]['menu']
+                            let price = popstars[i]['price']
+                            let menu_info = popstars[i]['menu_info']
+                            let name = popstars[i]['name']
+                            let number = popstars[i]['number']
+                            let address = popstars[i]['address']
+                            let score = popstars[i]['score']
+                            let url = popstars[i]['url']
+                            let menu_image =popstars[i]['menu_image']
+                            console.log(menu,price,menu_info,name,number,address,score,url,menu_image)
+
+                            let temp_html=`<div class="card">
+                <img src="${menu_image}" alt="이미지없음"/>
+                <div class="card-text">
+
+                    <p>${menu}&nbsp${price}</p>
+                    <p>${menu_info}</p>
+                    <p>휴게소: ${name}</p>
+                    <p>주소: ${address}</p>
+                    <P>연락처: ${number}</P>
+                    <p>별점: ${score}</p>
+                    <span>더 알고 싶다면?</span><a href="${url}">상세보기</a>
+                </div>
+            </div>`
+           $('#card_box').append(temp_html)
+                            }
+                    }
+
+                });
+                }
+
+</script>
+    </head>
+<body>
+<div class='wrap'>
+        <div class="box_card" id="card_box">
+
+        </div>
+</div>
+
+</body>
+</html>
