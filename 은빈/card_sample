@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .wrap{
+            width: 1500px;
+            margin: auto;
+        }
+
+    .box_card {
+            width: 100%;
+            margin: auto auto auto 5px;
+            /*  card float의 margin-left가 10px 씩 두번이니까 20px를 줘봤더니 맞았음  */
+        }
+
+        .card {
+            float:left;
+            width: 20%;
+            border: 1px solid lightgray;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        .card-text{
+            padding: 20px 20px 5px 20px;
+        }
+
+</style>
+<script>
+    function showpost() {
+                $.ajax({
+                    type: "GET",
+                    url: "/review?sample_give=샘플데이터",
+                    data: {},
+                    success: function (response) {
+                        let movies = response['movie_list']
+                        for (i=0; i<movies.length; i++){
+                            let title = movies[i]['title']
+                            let image = movies[i]['img']
+                            let url = movies[i]['url']
+                            let desc = movies[i]['desc']
+                            let comment = movies[i]['comment']
+
+                            let temp_html = `<div class="card">
+                                                 <img src="${image}"/>
+                                                 <div class="card-text">
+                                                     <a href="${url}">${title}</a>
+                                                     <p>${desc}</p>
+                                                     <p class="text_color">${comment}</p>
+                                                 </div>
+                                             </div>`
+
+                            $(`#card_box`).append(temp_html)
+                        }
+                    }
+                })
+    }
+
+</script>
+<body>
+<div class='wrap'>
+        <div class="box_card" id="card_box">
+            <div class="card">
+                <img src="image_url" alt="이미지없음"/>
+                <div class="card-text">
+                    <a href="https://www.naver.com/">여기에 기사 제목</a>
+                    <p>기사의 요약 내용이 들어갑니다. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세 무궁화 삼천리 화려강산...</p>
+                    <p class="text_color">코멘트 입력</p>
+                </div>
+            </div>
+        </div>
+</div>
+
+</body>
+</html>
