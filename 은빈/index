@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+
+    <title>나홀로 링크 메모장</title>
+</head>
+    <style>
+        @font-face { font-family: 'MaruBuri-Regular';
+                     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
+                     font-weight: normal;
+                     font-style: normal; }
+        *{
+            font-family: 'MaruBuri-Regular', verdana, tahoma;
+        }
+
+        .text_size10pt{
+            font-size: 10pt;
+        }
+
+        .text_color {
+            color: #0f77bb;
+            font-weight: bold;
+        }
+
+        .wrap{
+            width: 900px;
+            margin: auto;
+        }
+        .top_box{
+            background-color: #f3f3f3;
+            margin:30px auto;
+            /*시계방향으로 padding 순서 top right bottom left */
+            padding: 80px 50px;
+            border-radius: 5px;
+        }
+        .line{
+            line-height: 40px;
+        }
+        .button_style01{
+            background-color: #379bff;
+            color: white;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 3px;
+            margin-top: 10px;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover{
+            background-color: #2a75c0;
+        }
+        button:focus{
+            animation-name: btfocus;
+            animation-duration: 0.08s;
+            animation-fill-mode: forwards;
+        }
+        @keyframes btfocus {
+            from{
+                outline: none;
+                box-shadow: 0 0 0px 0pt #7ac3ff;
+            } to{
+                outline: none;
+                box-shadow: 0 0 1px 2pt #7ac3ff;
+              }
+        }
+
+        .middle_box{
+            border: black solid;
+            border-radius: 5px;
+            margin: 30px auto;
+            width: 500px;
+            display: none;
+        }
+
+        .middle_text{
+            padding: 40px 60px;
+        }
+
+        .middle_input01{
+            width: 380px;
+            height: 35px;
+            border-radius: 4px;
+            border: 1px solid lightgray;
+        }
+        input:focus{
+            animation-name: infocus;
+            animation-duration: 0.08s;
+            animation-fill-mode: forwards;
+        }
+
+        .middle_input02{
+            width: 380px;
+            border-radius: 4px;
+            border: 1px solid lightgray;
+        }
+        textarea:focus{
+            animation-name: infocus;
+            animation-duration: 0.08s;
+            animation-fill-mode: forwards;
+        }
+        @keyframes infocus {
+            from{
+                border: 1px solid #4996ee;
+                border-radius: 4px;
+                outline: none;
+                box-shadow: 0 0 0px 0pt #8cb1ef;
+            } to{
+                border: 1px solid #4996ee;
+                border-radius: 4px;
+                outline: none;
+                box-shadow: 0 0 1px 2pt #7ac3ff;
+              }
+        }
+
+        .box_card {
+            width: 100%;
+            margin: auto auto auto 5px;
+            /*  card float의 margin-left가 10px 씩 두번이니까 20px를 줘봤더니 맞았음  */
+        }
+
+        .card {
+            float:left;
+            width: 30%;
+            border: 1px solid lightgray;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        .card-text{
+            padding: 20px 20px 5px 20px;
+        }
+
+
+    </style>
+    <script>
+        $(document).ready(function () {
+                showpost();
+            });
+
+        function posting_box(){
+            if($(`#posting_box`).css("display") == "none"){
+                $(`#posting_bt`).text('포스팅박스 닫기')
+                $(`#posting_box`).show();
+            }else{
+                $(`#posting_bt`).text('포스팅박스 열기')
+                $(`#posting_box`).hide();
+            }
+        }
+
+        function posting() {
+            let url = $(`#article_input`).val()
+            let comment = $(`#comment_input`).val()
+
+                $.ajax({
+                    type: "POST",
+                    url: "/memo",
+                    data: {url_give:url,comment_give:comment},
+                    success: function (response) {
+                        console.log(url,comment)
+                        alert(response["msg"]);
+                        window.location.reload();
+                    }
+                })
+            }
+        function showpost() {
+                $.ajax({
+                    type: "GET",
+                    url: "/memo",
+                    data: {},
+                    success: function (response) {
+                        let movies = response['movie_list']
+                        for (i=0; i<movies.length; i++){
+                            let title = movies[i]['title']
+                            let image = movies[i]['img']
+                            let url = movies[i]['url']
+                            let desc = movies[i]['desc']
+                            let comment = movies[i]['comment']
+
+                            let temp_html = `<div class="card">
+                                                 <img src="${image}"/>
+                                                 <div class="card-text">
+                                                     <a href="${url}">${title}</a>
+                                                     <p>${desc}</p>
+                                                     <p class="text_color">${comment}</p>
+                                                 </div>
+                                             </div>`
+
+                            $(`#card_box`).append(temp_html)
+                        }
+                    }
+                })
+            }
+
+    </script>
+<body>
+    <div class='wrap'>
+
+        <div class="top_box">
+            <div class="line">
+                <h1 >나홀로 링크 메모장!</h1>
+                <p>중요한 링크를 저장해두고, 나중에 볼 수 있는 공간입니다.</p>
+                <hr>
+            </div>
+            <button id="posting_bt" class="button_style01" onclick="posting_box()">포스팅박스 열기</button>
+        </div>
+
+        <div id="posting_box" class="middle_box">
+            <div class="middle_text">
+                <p>아티클 URL</p>
+                <input class="middle_input01" id="article_input">
+                <p>
+                <p>간단 코멘트</p>
+                <textarea class="middle_input02" id="comment_input"></textarea>
+                <p>
+                <button class="button_style01 text_size10pt" onclick="posting()">기사저장</button>
+            </div>
+        </div>
+
+        <div class="box_card" id="card_box">
+            <div class="card">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbSjDIW%2Fbtrd04bLHuk%2Fjh9soU7pUEQrLA9eK5wG11%2Fimg.jpg"/>
+                <div class="card-text">
+                    <a href="https://www.naver.com/">여기에 기사 제목</a>
+                    <p>기사의 요약 내용이 들어갑니다. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세 무궁화 삼천리 화려강산...</p>
+                    <p class="text_color">코멘트 입력</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
+
