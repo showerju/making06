@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>휴게소를 먹다</title>
+    <script type="text/javascript"
+            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xlkaszxuya"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <meta charset="EUC-KR">
+
+
+
+    <script language="javascript"> function showPopup() {
+        window.open("info_popup.html", "a", "width=800px, height=900px, left=100, top=50");
+    } </script>
+
+    <style>
+        nav {
+            width: 100%;
+            margin: auto;
+            background: #fff;
+            padding: 0px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #aaa;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: 0 10px;
+        }
+
+        nav ul li a,
+        nav ul li a:after,
+        nav ul li a:before {
+            transition: all .5s;
+        }
+
+        nav ul li a:hover {
+            color: #555;
+        }
+
+
+        /* SHIFT */
+        nav.shift ul li a {
+            position: relative;
+            z-index: 1;
+        }
+
+        nav.shift ul li a:hover {
+            color: #ffffff;
+        }
+
+        nav.shift ul li a:after {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            width: 100%;
+            height: 1px;
+            content: '.';
+            color: transparent;
+            background: #ED1C24;
+            visibility: none;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        nav.shift ul li a:hover:after {
+            opacity: 1;
+            visibility: visible;
+            height: 100%;
+        }
+
+        .header {
+            height: 346px;
+            width: 1442px;
+
+            text-align: left;
+
+            background-image: url("/static/Highway.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: auto;
+        }
+
+        .header h1 {
+            font-weight: normal;
+            color: white;
+            text-align: center;
+            position: static;
+            padding-top: 75px;
+            font-size: 25px;
+            margin-top: 76px;
+        }
+
+        .header h2 {
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            position: static;
+            padding-top: 10px;
+            font-size: 70px;
+        }
+
+        .recommend {
+            padding-top: 40px;
+            padding-left: 80px;
+            padding-right: 80px;
+            position: relative;
+            width: 1442px;
+            height: 500px;
+            margin: auto;
+        }
+
+        .recommend h1 {
+            font-size: 25px;
+            font-weight: bold;
+            margin: auto;
+        }
+
+        .box .list-card > li {
+            width: 300px;
+            min-height: 200px;
+            margin: 25px 10px 0px 0px;
+            padding: 28px 20px;
+            display: flex;
+            border: 2px solid #C5C5D8;
+            border-radius: 10px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, .2);
+            flex-direction: column;
+        }
+
+        .box .img {
+            margin-bottom: 5px;
+            width: 256px;
+            height: 200px;
+            border-radius: 10px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, .2);
+        }
+
+        .box .list-card > li .txt-area {
+            line-height: 30px;
+            margin-top: 10px;
+            font-size: 24px;
+            word-break: keep-all;
+            font-weight: bold;
+        }
+
+        .box .list-card > li .btn-area {
+            margin-top: 15px;
+        }
+
+        cta1 {
+            position: relative;
+            display: inline-flex;
+            width: 200px;
+            height: 50px;
+            margin: 0 15px;
+            perspective: 1000px;
+        }
+
+        cta1 a {
+            font-size: 19px;
+            letter-spacing: 1px;
+            transform-style: preserve-3d;
+            transform: translateZ(-25px);
+            transition: transform .25s;
+        }
+
+        cta1 a:before,
+        cta1 a:after {
+            position: absolute;
+            content: "맛집 찾아보기";
+            height: 50px;
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 5px solid orangered;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        cta1 a:before {
+            color: #fff;
+            background: orangered;
+            transform: rotateY(0deg) translateZ(25px);
+        }
+
+        cta1 a:after {
+            color: #ffffff;
+            transform: rotateX(90deg) translateZ(25px);
+        }
+
+        cta1 a:hover {
+            transform: translateZ(-25px) rotateX(-90deg);
+        }
+
+        .mapstart {
+            width: 1442px;
+            text-align: center;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        .divider {
+            height: 130px;
+            width: 1442px;
+
+            text-align: center;
+
+            background-image: url("/static/divider1.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: auto;
+        }
+
+        input[type=text] {
+            padding: 6px 20px;
+            margin: 30px 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .footer-dark {
+            padding: 50px 0;
+            color: black;
+            background-color: lightgray;
+        }
+
+        .footer-dark h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .footer-dark ul {
+            padding: 0;
+            list-style: none;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .footer-dark ul a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.6;
+        }
+
+        .footer-dark ul a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 767px) {
+            .footer-dark .item:not(.social) {
+                text-align: center;
+                padding-bottom: 20px;
+            }
+        }
+
+        .footer-dark .item.text {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 767px) {
+            .footer-dark .item.text {
+                margin-bottom: 0;
+            }
+        }
+
+        .footer-dark .item.text p {
+            opacity: 0.6;
+            margin-bottom: 0;
+        }
+
+        .footer-dark .item.social > a:hover {
+            opacity: 0.9;
+        }
+
+        .footer-dark .copyright {
+            text-align: center;
+            padding-top: 10px;
+            opacity: 0.3;
+            font-size: 13px;
+            margin-bottom: 0;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<section style="position: fixed; width: 1442px; margin: auto; top: 0;left: 0;right: 0; z-index: 999">
+    <nav class="shift">
+        <div style="float: left; margin-top: 15px; margin-left: 50px; margin-right: 10px"><a href="indexnew.html">
+            <img src="/static/logo.png" width="104" alt="휴먹">
+        </a></div>
+        <ul style="padding-top: 15px">
+            <li><a href="indexnew.html">Home</a></li>
+            <li><a href="boardnew.html">먹거리 제안하기</a></li>
+            <li><a href="introduce_member.html">팀 소개</a></li>
+        </ul>
+        <hr style="width:100%;text-align:left;margin-left:0; margin-bottom: 0">
+    </nav>
+</section>
+
+
+<section class="header" id="header">
+    <div>
+        <h1>
+            여행의 시작과 끝 <br> 전국 휴게소 맛집 플랫폼 <br>
+        </h1>
+        <h2>
+            <span style="color: #ED1C24">휴</span>게소를 <span style="color: #ED1C24">먹</span>다
+        </h2>
+        <div style="text-align: center; margin-top: 20px">
+            <cta1><a href="#scroll"></a></cta1>
+        </div>
+    </div>
+</section>
+
+
+<section class="recommend">
+    <h1>
+        가장 많이 찾는 휴게소 Top 3 >
+    </h1>
+    <div class="box">
+        <ul class="list-card" style="padding-left: 0px;float: left;">
+            <li>
+                <div>
+                    <img src="https://me2.kr/utu91" alt="alternatetext" class="img">
+                </div>
+                <div class="txt-area">서울 만남의광장 휴게소</div>
+                <div class="btn-area">
+                    <button type="button" class="btn btn-danger" style="width: 150px;float: left;margin-right: 10px">맛집
+                        탐방하기
+                    </button>
+                    <button type="button" class="btn btn-primary" style="width:96px">👍🏻 1</button>
+                </div>
+            </li>
+        </ul>
+        <ul class="list-card" style="padding-left: 0px;float: left;">
+            <li>
+                <div>
+                    <img src="https://me2.kr/utu91" alt="alternatetext" class="img">
+                </div>
+                <div class="txt-area">서울 만남의광장 휴게소</div>
+                <div class="btn-area">
+                    <button type="button" class="btn btn-danger" style="width: 150px;float: left;margin-right: 10px">맛집
+                        탐방하기
+                    </button>
+                    <button type="button" class="btn btn-primary" style="width:96px">👍🏻 1</button>
+                </div>
+            </li>
+        </ul>
+        <ul class="list-card" style="padding-left: 0px;float: left;">
+            <li>
+                <div>
+                    <img src="https://me2.kr/utu91" alt="alternatetext" class="img">
+                </div>
+                <div class="txt-area">서울 만남의광장 휴게소</div>
+                <div class="btn-area">
+                    <button type="button" class="btn btn-danger" style="width: 150px;float: left;margin-right: 10px">맛집
+                        탐방하기
+                    </button>
+                    <button type="button" class="btn btn-primary" style="width:96px" id="scroll">👍🏻 1</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section class="mapstart">
+    <div class="divider"
+         style="font-weight: bold; font-size: 30px; margin-bottom: 5px; padding-top: 21px; color: white">
+        <p>여행의 시작과 끝만 알려주세요 <br>맛집은 휴먹이 찾을게요 </p>
+
+    </div>
+
+    <form>
+        <label for="fname" style="font-weight: bold">출발지</label>
+        <input type="text" id="fname" name="fname" style="margin-right: 25px">
+        <label for="lname" style="font-weight: bold">목적지</label>
+        <input type="text" id="lname" name="lname" style="margin-right: 25px">
+        <button type="button" class="btn btn-dark" style="padding: 6px 20px; margin-bottom: 4px">맛집 검색</button>
+    </form>
+
+    <div id="map" style="width:1000px;height:750px;margin: auto; margin-bottom: 50px"></div>
+</section>
+
+<section style="">
+    <div class="container">
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">팝업창 열기</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div>
+                                <div>
+                                    <img src="https://me2.kr/z8lz7" alt="이미지없음"
+                                         style="width: 466px;text-align: center; border-radius: 10px"/>
+                                    <div>
+                                        <p style="font-size: 25px; font-weight: bold; margin-top: 20px;margin-bottom: 5px">
+                                            순두부청국장&nbsp&nbsp<span
+                                                style="font-size: 15px; font-weight: normal">7,000원</span></p>
+                                        <hr class="hr_style">
+                                        <p>직접 만든 순두부로 맛과 영양을 잡았다! 옥산 순두부 청국장 냄새도 심하지 않고 간도 세지 않아 먹기 좋다 심지어 속도 편해 안 먹을 수가
+                                            없다!</p>
+                                        <hr class="hr_style">
+                                        <div style="line-height: 28px">
+                                            <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp옥산휴게소 (부산방향)</span>
+                                            </p>
+                                            <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span
+                                                    style="font-weight: normal"> &nbsp&nbsp충북 청주시 흥덕구 옥산면 경부고속도로 309</span>
+                                            </p>
+                                            <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp063-260-1053</span>
+                                            </P>
+                                            <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span
+                                                    style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>
+                                        </div>
+                                        <hr class="hr_style">
+                                        <span style="font-weight: bold">더 알고 싶다면?</span><a
+                                            href="https://goo.gl/maps/Go1XjzaqC96Dqx1Z7"> 상세보기</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">👍🏻 1</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<div class="footer-dark">
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>Service</h3>
+                    <ul>
+                        <li><a href="indexnew.html">홈</a></li>
+                        <li><a href="boardnew.html">먹거리 제안하기</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="introduce_member.html">팀 소개</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 item text">
+                    <h3>달밤코딩조</h3>
+                    <p>2021년 9월 3일 5명의 열정적인 내일배움단 팀원들이 모여 만든 조이다. 전국 모든 휴게소에 대한 데이터를 축적하는 것을 목표로 하고 있으며 매일 밤 목표를 위해 열코를
+                        진행중인 팀이다.</p>
+                </div>
+                <p class="copyright">달밤코딩조 © 2021</p>
+            </div>
+    </footer>
+</div>
+</body>
+<footer>
+    <script>
+
+  $(function () {
+
+        initMap();
+
+    });
+
+
+    function initMap() {
+
+        var areaArr = new Array();  // 지역을 담는 배열 ( 지역명/위도경도 )
+        areaArr.push(
+            /*지역구 이름*/			/*위도*/					/*경도*/
+            {location: '서울만남의광장휴게소(부산방향)', lat: '37.46025188399002', lng: '127.04196158084015'}, // 강남구 중심좌표
+            {location: '죽전휴게소(서울방향)',    lat: '37.33238549545168', lng: '127.10481758612747'}, // 강동구 중심좌표
+            {location: '망향휴게소(부산방향)',   lat: '36.85537668936837', lng: '127.18087158822793'}, // 강북구 중심좌표
+            {location: '옥산휴게소(부산방향)',   lat:' 36.65771392021131', lng: '127.36982000961997'},// 강서구 중심좌표
+            {location: '죽암휴게소(부산방향)',   lat: '36.486780898348805',lng: '127.42926089180716'}, // 관악구 중심좌표
+            {location: '인삼랜드휴게소(하남방향)',  lat: '36.15470488687423', lng: '127.49769187314587'}, // 광진구 중심좌표
+            {location: '이서휴게소(논산방향)',   lat: '35.801952625742175',lng: '127.02576849590804'}, // 구로구 중심좌표
+            {location: '정읍녹두장군휴게소(논산방향)',   lat: '35.59996750575727', lng: '126.8643325245416'}, // 금천구 중심좌표
+            {location: '보성녹차휴게소(순천방향)',   lat: '34.80732155442688', lng: '127.18099379737176'}, // 노원구 중심좌표
+            {location: '횡성휴게소(강릉방향)',   lat: '37.46275755519266', lng: '128.13396927867132'}, // 도봉구 중심좌표
+            {location: '천등산휴게소(평택방향)',  lat: '37.07694893304106', lng: '127.98931943021573'}, // 동대문구 중심좌표
+            {location: '충주휴게소(양평방향)',   lat: '37.02316775118798', lng: '127.83928679745476'}, // 동작구 중심좌표
+            {location: '괴산휴게소(양평방향)',   lat: '36.83177713410066', lng: '127.96015439172078'}, // 마포구 중심좌표
+            {location: '군위휴게소(춘천방향)',    lat: '36.265498301868476',lng: '128.57690233891032'}, // 서대문구 중심좌표
+            {location: '추풍령휴게소(서울방향)',   lat: '36.19971559421238', lng: '128.00326067958855'}, // 서초구 중심좌표
+            {location: '영산휴게소(마산방향)',  lat: '35.42978631538088', lng: '128.49589747336327'},  // 성동구 중심좌표
+            {location: '경주휴게소(부산방향)',    lat: '35.724069216816254',lng: '129.19265470262897'}, // 성북구 중심좌표
+            {location: '진주휴게소(부산방향)',    lat: '35.15973757516861', lng: '128.12198426703276'}, // 송파구 중심좌표
+            {location: '섬진강휴게소(부산방향)',    lat: '34.984682931258625',lng: '127.77035093495383'},  // 양천구 중심좌표
+            {location: '기흥휴게소(부산방향)',   lat: '37.23493644055473', lng: '127.1045459074627'}, // 영등포구 중심좌표
+            {location: '안성휴게소(부산방향)',  lat: '37.013419735215436',lng: '127.14480747972593'},  // 용산구 중심좌표
+            {location: '여주휴게소(인천방향)',  lat: '37.23974756508235', lng: '127.56995384444281'}, // 은평구 중심좌표
+            {location: '문경휴게소(창원방향)',   lat: '36.62035936806056', lng: '128.1499245454857'}, // 종로구 중심좌표
+            {location: '속리산휴게소(청주방향)',  lat: '36.44769458136483', lng: '127.86905587549954'}, // 중구 중심좌표
+            {location: '오창휴게소(통영방향)',   lat: '36.758462471409324',lng: '127.48179634390809'}, // 중랑구 중심좌표
+            {location: '천안삼거리휴게소(서울방향)',lat: '36.78781395147762', lng: '127.1734366903498'}, // 중구 중심좌표
+            {location: '황간휴게소(부산방향)',    lat: '36.24887451676956', lng: '127.85264887475222'}, // 중구 중심좌표
+            {location: '진안마이산휴게소 (익산방향)',   lat: '35.777883600651634',lng: '127.42528370577209'},  // 중구 중심좌표
+            {location: '황전휴게소 (전주방향)',    lat: '35.153237852851746',lng: '127.45448542868527'},
+            {location: '백양사휴게소 (천안방향)',    lat: '35.39296566485018', lng:'126.80739638658395'},
+            {location: '칠곡휴게소(서울방향)',    lat: '36.01179120077814', lng: '128.4308484668563'}, // 중구 중심좌표
+            {location: '성주휴게소(양평방향)',  lat: '36.008584838611434',lng: '128.26111423587943'}, // 중구 중심좌표
+            {location: '안동휴게소(부산방향)',   lat: '36.55317367335304', lng:' 128.64190767726387'}, // 중구 중심좌표
+            {location: '진영휴게소(순천방향)',   lat: '35.28007440717322', lng: '128.71601079471563'}, // 중구 중심좌표
+            {location: '산청휴게소(하남방향)', lat: '35.333498918746635',lng: '127.93899678012033'}, // 중구 중심좌표
+            {location: '통도사휴게소(부산방향)',   lat: '35.4888534980784',  lng: '129.09075599798786'} // 중구 중심좌표
+
+        );
+
+
+        let markers = new Array(); // 마커 정보를 담는 배열
+        let infoWindows = new Array(); // 정보창을 담는 배열
+
+        var map = new naver.maps.Map('map', {
+            center: new naver.maps.LatLng(36.138626808096, 127.88858512205674),
+            zoom: 8
+        });
+
+
+        for (var i = 0; i < areaArr.length; i++) {
+            // 지역을 담은 배열의 길이만큼 for문으로 마커와 정보창을 채워주자 !
+
+            var marker = new naver.maps.Marker({
+                map: map,
+                title: areaArr[i].location, // 지역구 이름
+                position: new naver.maps.LatLng(areaArr[i].lat, areaArr[i].lng) // 지역구의 위도 경도 넣기
+            });
+
+            /* 정보창 */
+            var infoWindow = new naver.maps.InfoWindow({
+                content: '<div class="aa" style="width:400px;text-align:center;padding:10px;"><b>' + areaArr[i].location + '</b><br> - 네이버 지도 - </div>'
+            }); // 클릭했을 때 띄워줄 정보 HTML 작성
+
+
+            markers.push(marker); // 생성한 마커를 배열에 담는다.
+            infoWindows.push(infoWindow); // 생성한 정보창을 배열에 담는다.
+        }
+
+
+        function getClickHandler(seq) {
+
+            return function (e) {  // 마커를 클릭하는 부분
+                var marker = markers[seq], // 클릭한 마커의 시퀀스로 찾는다.
+                    infoWindow = infoWindows[seq]; // 클릭한 마커의 시퀀스로 찾는다
+
+                if (infoWindow.getMap()) {
+                    infoWindow.close();
+                } else {
+                    infoWindow.open(map, marker); // 표출
+                }
+            }
+        }
+
+        for (var i = 0, ii = markers.length; i < ii; i++) {
+            console.log(markers[i], getClickHandler(i));
+            naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i)); // 클릭한 마커 핸들러
+        }
+    }
+
+    </script>
+</footer>
