@@ -1,130 +1,370 @@
-<!DOCTYPE html>
-<html lang="ko">
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>마이 페이보릿 무비스타 | 프론트-백엔드 연결 마지막 예제!</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"/>
-        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-        <style>
-            .center {
-                text-align: center;
-            }
+<!doctype html>
+<html lang="en">
 
-            .star-list {
-                width: 500px;
-                margin: 20px auto 0 auto;
-            }
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
-            .star-name {
-                display: inline-block;
-            }
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-            .star-name:hover {
-                text-decoration: underline;
-            }
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
-            .card {
-                margin-bottom: 15px;
-            }
-        </style>
-        <script>
-            $(document).ready(function () {
-                showStar();
+    <title>휴게소를 먹다</title>
+
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xlkaszxuya"></script>
+
+    <script language="javascript"> function showPopup() {
+        window.open("info_popup.html", "a", "width=800px, height=900px, left=100, top=50");
+    } </script>
+
+    <style>
+
+
+        /* Add a black background color to the top navigation */
+        .topnav {
+            background-color: #333;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* Style the links inside the navigation bar */
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            text-align: center;
+        }
+
+        /* Change the color of links on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Add a color to the active/current link */
+        .topnav a.active {
+            background-color: orange;
+            color: white;
+        }
+
+        .header {
+            width: 1509px;
+            height: 487px;
+
+            text-align: left;
+
+            background-image: url("/static/title_image.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: auto;
+        }
+
+        .header h1 {
+            font-size: 100px;
+            font-weight: bold;
+            padding: 60px 270px;
+            line-height: 110px;
+            letter-spacing: 8px;
+            padding-bottom: 0px;
+        }
+
+        .search_position {
+            padding-left: 270px;
+            padding-top: 15px;}
+
+        * {
+            box-sizing: content-box;
+        }
+
+        /* Style the search field */
+        form.example input[type=text] {
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid grey;
+            float: left;
+            width: 23%;
+            background: #f1f1f1;
+        }
+
+        /* Style the submit button */
+        form.example button {
+            float: left;
+            width: 3%;
+            padding: 10px;
+            background: orange;
+            color: white;
+            font-size: 17px;
+            border: 1px solid grey;
+            border-left: none; /* Prevent double borders */
+            cursor: pointer;
+        }
+
+        form.example button:hover {
+            background: #0b7dda;
+        }
+
+        /* Clear floats */
+        form.example::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .center_align {
+            width: 1300px;
+            height : 800px;
+            margin: auto;
+        }
+
+        .card {
+            display: none;
+            position: fixed;
+
+            background-color: whitesmoke;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            z-index: 100;
+            background-position: center;
+
+            width: 100%;
+            left: 50%;
+            margin-left: -10%;
+            height: 600px;
+            top: 25%;
+            margin-top: -150px;
+
+
+
+
+            border: 1px;
+            box-sizing: border-box;
+        }
+
+
+        .btn {}
+
+
+        .open {
+            display: block;
+            width: 50px;
+            height: 50px;
+            background: darkred;
+            text-decoration: none;
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+
+            line-height: 50px;
+            color: white;
+
+            border-radius: 50px;
+            margin: 10px 0px 300px 330px;
+        }
+
+        .close {
+            position: absolute;
+
+            text-decoration: none;
+             margin: 10px 0px 300px 330px;
+
+        }
+
+        .dim2 {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 99;
+            width: 200%;
+            height: 200%;
+            background: rgba(0, 0, 0, 0.6);
+
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $(".open").on('click', function () {
+                $(".card").show();
+                $(".dim2").show();
             });
 
-            function showStar() {
-                $.ajax({
-                    type: 'GET',
-                    url: '/api/list?sample_give=샘플데이터',
-                    data: {},
-                    success: function (response) {
-                        let mystars = response['movie_stars']
-                        for (let i= 0; i <mystars.length; i ++) {
-                            let name = mystars[i]['name']
-                            let img_url = mystars[i]['img_url']
-                            let recent = mystars[i]['recent ']
-                            let url = mystars[i]['url']
-                            let like = mystars[i]['like']
+            $(".btn").on('click', function () {
+                $(this).parent().hide();
+                $(".dim2").hide();
+            });
+        });
+    </script>
+</head>
 
-                            let temp_html =` <div class="card">
-                <div class="card-content">
-                    <div class="media">
-                        <div class="media-left">
-                            <figure class="image is-48x48">
-                                <img
-                                        src="${img_url}"
-                                        alt="Placeholder image"
-                                />
-                            </figure>
-                        </div>
-                        <div class="media-content">
-                            <a href="${url}" target="_blank" class="star-name title is-4">${name}(좋아요: ${like})</a>
-                            <p class="subtitle is-6">${recent}</p>
-                        </div>
-                    </div>
-                </div>
-                <footer class="card-footer">
-                    <a href="#" onclick="likeStar('${name})" class="card-footer-item has-text-info">
-                        위로!
-                        <span class="icon">
-              <i class="fas fa-thumbs-up"></i>
-            </span>
-                    </a>
-                    <a href="#" onclick="deleteStar('${name}')" class="card-footer-item has-text-danger">
-                        삭제
-                        <span class="icon">
-              <i class="fas fa-ban"></i>
-            </span>
-                    </a>
-                </footer>
-            </div>`
-                            $('#star-box').append(temp_html)
-                        }
-                    }
-                });
+<body>
+<div class="topnav">
+    <a class="active" href="#메인화면">홈</a>
+    <a href="#제안하기">휴게소 추천하기</a>
+    <a href="#팀소개">팀소개</a>
+</div>
+<div class="header">
+    <h1>
+        <span style="color: indianred;font-weight: bolder">휴</span>게소를 <br>
+        <span style="color: indianred;font-weight: bolder">먹</span>다
+    </h1>
+    <div class="search_position">
+        <!-- Load icon library -->
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- The form -->
+        <form class="example" action="action_page.php">
+            <input type="text" placeholder="휴게소명을 입력하세요" name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+</div>
+
+<!--네이버 지도 화면-->
+
+<div style="background-color: #AED0EF">
+        <div id="map" class="center_align""></div>
+</div>
+<script>
+        <!--   마커를찍을장소     -->
+        //추가 희망사항 메모
+        //상하행 휴게소 아이콘 다르게 구분하기
+        //상행 하행으로 필터 넣을 수 있을듯?
+        const locations = [
+            { num: "01", place:"만남의광장(부산)", lat: 37.460121, lng: 127.041890 },
+            { num: "02", place:"죽전휴게소(서울)", lat: 37.332380, lng: 127.104788 },
+            { num: "03", place:"망향휴게소(부산)", lat: 36.855352, lng: 127.180854 },
+            { num: "04", place:"옥산휴게소(부산)", lat: 36.657709, lng: 127.369801 },
+            { num: "05", place:"죽암휴게소(부산)", lat: 36.486814, lng: 127.429259 },
+            { num: "06", place:"인삼랜드휴게소(하남)", lat: 36.154689, lng: 127.497683 },
+            { num: "07", place:"이서휴게소(천안)", lat: 35.801933, lng: 127.025797 },
+            { num: "08", place:"정읍휴게소(논산)", lat: 35.5999761, lng: 126.8643364 },
+            { num: "09", place:"보성녹차휴게소(순천)", lat: 34.8072995, lng: 127.1810007 },
+            { num: "10", place:"횡성휴게소(강릉)", lat: 37.462763, lng: 128.133971 },
+            { num: "11", place:"천등산휴게소(평택)", lat: 37.0769357, lng: 127.9893113 },
+            { num: "12", place:"충주휴게소(양평)", lat: 37.0232328, lng: 127.8392751 },
+            { num: "13", place:"괴산휴게소(양평)", lat: 36.8317809, lng: 127.9601453 },
+            { num: "14", place:"군위휴게소(춘천)", lat: 36.2649235, lng: 128.5766838 },
+            { num: "15", place:"추풍령휴게소(서울)", lat: 36.1997189, lng: 128.0032422 },
+            { num: "16", place:"영산휴게소(창원)", lat: 35.429792, lng: 128.4959112 },
+            { num: "17", place:"경주휴게소(부산)", lat: 35.724102, lng: 129.192641 },
+            { num: "18", place:"진주휴게소(부산)", lat: 35.159759, lng: 128.122008 },
+            { num: "19", place:"섬진강휴게소(부산)", lat: 34.984692, lng: 127.770356 },
+            { num: "20", place:"기흥휴게소(부산)", lat: 37.234940, lng: 127.104550 },
+            { num: "21", place:"안성휴게소(부산)", lat: 37.013415, lng: 127.144806 },
+            { num: "22", place:"여주휴게소(인천)", lat: 37.239744, lng: 127.569961 },
+            { num: "23", place:"문경휴게소(창원)", lat: 36.620401, lng: 128.149956 },
+            { num: "24", place:"속리산휴게소(청원)", lat: 36.447702, lng: 127.869061 },
+            { num: "25", place:"오창휴게소(통영)", lat: 36.758475, lng: 127.481779 },
+            { num: "26", place:"천안삼거리휴게소(서울)", lat: 36.787830, lng: 127.173446 },
+            { num: "27", place:"황간휴게소(부산)", lat: 36.248901, lng: 127.8526838 },
+            { num: "28", place:"진안마이산휴게소(익산)", lat: 35.777897, lng: 127.425282 },
+            { num: "29", place:"황전휴게소(완주)", lat: 35.153306, lng: 127.454719 },
+            { num: "30", place:"백양사휴게소(천안)", lat: 35.393012, lng: 126.807381 },
+            { num: "31", place:"칠곡휴게소(서울)", lat: 36.011782, lng: 128.430853 },
+            { num: "32", place:"성주휴게소(양평)", lat: 36.008553, lng: 128.261111 },
+            { num: "33", place:"안동휴게소(부산)", lat: 36.553146, lng: 128.641936 },
+            { num: "34", place:"진영휴게소(순천)", lat: 35.280076, lng: 128.716002 },
+            { num: "35", place:"산청휴게소(하남)", lat: 35.333518, lng: 127.939008 },
+            { num: "36", place:"통도사휴게소(부산)", lat: 35.488854, lng: 129.090771 },
+
+
+        ];
+        <!--  지도 기본  -->
+        //지도 기본설정
+        var map = new naver.maps.Map('map', {
+            center: new naver.maps.LatLng(36.138626808096, 127.88858512205674),
+            zoom: 8,
+            zoomControl: true, //줌 컨트롤의 표시 여부
+            zoomControlOptions: { //줌 컨트롤의 옵션
+                position: naver.maps.Position.TOP_RIGHT
             }
+        });
 
-            function likeStar(name) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/like',
-                    data: {sample_give:'샘플데이터'},
-                    success: function (response) {
-                        alert(response['msg']);
-                    }
-                });
-            }
+        for (var i = 0; i < locations.length; i++) {
+            var marker = new naver.maps.Marker({
+                map: map,
+                title: locations[i].place,
+                position: new naver.maps.LatLng(locations[i].lat, locations[i].lng),
+            });
+        }
+        var cityhall = new naver.maps.LatLng(37.5666805, 126.9784147);
 
-            function deleteStar(name) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/delete',
-                    data: {sample_give:'샘플데이터'},
-                    success: function (response) {
-                        alert(response['msg']);
-                    }
-                });
-            }
 
-        </script>
-    </head>
-    <body>
-        <section class="hero is-warning">
-            <div class="hero-body">
-                <div class="container center">
-                    <h1 class="title">
-                        마이 페이보릿 무비스타😆
-                    </h1>
-                    <h2 class="subtitle">
-                        순위를 매겨봅시다
-                    </h2>
-                </div>
-            </div>
-        </section>
-        <div class="star-list" id="star-box">
 
-        </div>
-    </body>
+var contentString = [
+    '<div class="iw_inner">',
+    '   <h3>서울만남의관장휴게소(부산)</h3>',
+    '   <p><br>',
+    '       <img src="" width="" height="" alt="" class="" /><br>',
+    '       <br>',
+    '       <a <input type="button" value="팝업창 호출" onclick="showPopup();"/>휴게소더알아보기</a>',
+    '   </p>',
+    '</div>'
+].join('');
+
+var marker = new naver.maps.Marker({
+    map: map,
+    position: cityhall
+});
+
+var infowindow = new naver.maps.InfoWindow({
+    content: contentString
+});
+
+naver.maps.Event.addListener(marker, "click", function(e) {
+    if (infowindow.getMap()) {
+        infowindow.close();
+    } else {
+        infowindow.open(map, marker);
+    }
+});
+</script>
+
+<!-- 팝업 -->
+<div class="card" style="width: 25rem;">
+    <div class="btn"><a href="#a" class="close"><img src="circle-x-4x.png"></a><img class="card-img-top"
+         src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA5MTFfMjkw%2FMDAxNTY4MTcwOTczNDc3.XI1o84djBAj44maIEF9ramD0--A5cMjtdmvaZDpUf7cg.KVIHiX_I_ZDaAsp5Mto18iPbhGw61qW4OpCulsK68V0g.JPEG.exhappyway%2F%25C1%25A6%25BA%25F1%25BF%25F8_%25B5%25C8%25C0%25E5%25C2%25EE%25B0%25B31.jpg&type=sc960_832" alt="Card image cap"></div>
+
+    <div class="card-body">
+        <h5 class="card-title"><span style="font-size: xxx-large; font-weight: bolder" >제비원 된장찌개</span> </h5>
+        <p class="card-text"><span style="font-size: x-large; font-weight: bolder">식.품.명.인이 직접 담근 메주!<br> '안동 제비원'에서 4대째 내려온 전통 손맛!<br>한국도로공사 선정 휴게소 대표음식!<br>재래식 된장 본연의 맛을
+            즐기세요</span> </p>
+    </div>
+        <ul class="list-group list-group-flush">
+        <span style="font-size: larger">
+        <li class="list-group-item">휴게소 : <span style="color: darkred">군위</span>휴게소<span
+                style="color:darkred">(춘천방향)</span></li>
+        <li class="list-group-item">주소 : 경상북도 군위군 군위읍 경북대로 4082</li>
+        <li class="list-group-item">연락처 : 053-383-7114</li>
+        <li class="list-group-item">영업시간 : 24시간</li>
+        <li class="list-group-item">
+            더 알고 싶다면? <a
+                href="https://www.google.com/maps/place/%EA%B5%B0%EC%9C%84%ED%9C%B4%EA%B2%8C%EC%86%8C+%EC%B6%98%EC%B2%9C%EB%B0%A9%ED%96%A5/@36.2649235,128.5766838,15z/data=!4m5!3m4!1s0x0:0xf7d96e17737fa997!8m2!3d36.2649235!4d128.5766838"
+                class="card-link">상세보기</a></li>
+        <li class="list-group-item">별점 3.7</li>
+        </span>
+    </ul>
+</div>
+<div class="dim2">
+</div>
+</body>
+
 </html>

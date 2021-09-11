@@ -3,19 +3,187 @@
 
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
     <title>휴게소를 먹다</title>
+
+    <script type="text/javascript"
+            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xlkaszxuya"></script>
+
+    <script language="javascript"> function showPopup() {
+        window.open("info_popup.html", "a", "width=800px, height=900px, left=100, top=50");
+    } </script>
+
     <style>
+        nav {
+            width: 100%;
+            margin: auto;
+            background: #fff;
+            padding: 0px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #aaa;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: 0 10px;
+        }
+
+        nav ul li a,
+        nav ul li a:after,
+        nav ul li a:before {
+            transition: all .5s;
+        }
+
+        nav ul li a:hover {
+            color: #555;
+        }
+
+
+        /* SHIFT */
+        nav.shift ul li a {
+            position: relative;
+            z-index: 1;
+        }
+
+        nav.shift ul li a:hover {
+            color: #ffffff;
+        }
+
+        nav.shift ul li a:after {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            width: 100%;
+            height: 1px;
+            content: '.';
+            color: transparent;
+            background: #ED1C24;
+            visibility: none;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        nav.shift ul li a:hover:after {
+            opacity: 1;
+            visibility: visible;
+            height: 100%;
+        }
+
+
+        input[type=text] {
+            padding: 1px 1px;
+            margin: auto;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .footer-dark {
+            padding: 50px 0;
+            color: black;
+            background-color: lightgray;
+        }
+
+        .footer-dark h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .footer-dark ul {
+            padding: 0;
+            list-style: none;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .footer-dark ul a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.6;
+        }
+
+        .footer-dark ul a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 767px) {
+            .footer-dark .item:not(.social) {
+                text-align: center;
+                padding-bottom: 20px;
+            }
+        }
+
+        .footer-dark .item.text {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 767px) {
+            .footer-dark .item.text {
+                margin-bottom: 0;
+            }
+        }
+
+        .footer-dark .item.text p {
+            opacity: 0.6;
+            margin-bottom: 0;
+        }
+
+        .footer-dark .item.social > a:hover {
+            opacity: 0.9;
+        }
+
+        .footer-dark .copyright {
+            text-align: center;
+            padding-top: 10px;
+            opacity: 0.3;
+            font-size: 13px;
+            margin-bottom: 0;
+        }
+
         * {
             margin: 0;
             padding: 0;
         }
 
-        html {
-            font-size: 10px;
-        }
 
         ul, li {
             list-style: none;
@@ -27,12 +195,15 @@
         }
 
         .board_wrap {
-            width: 1000px;
+            width: 1442px;
             margin: 100px auto;
+            padding-left: 80px;
+            padding-right: 80px;
+
         }
 
         .board_title {
-            margin-bottom: 30px;
+            margin-bottom: 10px;
         }
 
         .board_title strong {
@@ -41,34 +212,11 @@
 
         .board_title p {
             margin-top: 5px;
-            font-size: 1.4rem;
+            font-size: 16px;
         }
 
-        .bt_wrap {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 0;
         }
 
-        .bt_wrap a {
-            display: inline-block;
-            min-width: 80px;
-            margin-left: 10px;
-            padding: 10px;
-            border: 1px solid #000;
-            border-radius: 2px;
-            font-size: 1.4rem;
-        }
-
-        .bt_wrap a:first-child {
-            margin-left: 0;
-        }
-
-        .bt_wrap a.on {
-            background: #000;
-            color: #fff;
-        }
-        
         .board_list {
             width: 100%;
             border-top: 2px solid #000;
@@ -91,7 +239,7 @@
             display: inline-block;
             padding: 15px 0;
             text-align: center;
-            font-size: 1.4rem;
+            font-size: 15px;
         }
 
         .board_list > div.top > div {
@@ -124,7 +272,7 @@
         }
 
         .board_write {
-        border-top: 2px solid #000;
+            border-top: 2px solid #000;
         }
 
         .board_write .title,
@@ -135,7 +283,7 @@
         .board_write .info {
             border-top: 1px dashed #ddd;
             font-size: 0;
-        }        
+        }
 
         .board_write .title dl {
             font-size: 0;
@@ -153,7 +301,7 @@
         .board_write .info dd {
             display: inline-block;
             vertical-align: middle;
-            font-size: 1.4rem;
+            font-size: 14px;
         }
 
         .board_write .title dt,
@@ -181,7 +329,7 @@
             border-top: 1px dashed #ddd;
             border-bottom: 1px solid #000;
             font-size: 0;
-        }        
+        }
 
         .board_write .title dl {
             font-size: 0;
@@ -199,7 +347,7 @@
         .board_write .info1 dd {
             display: inline-block;
             vertical-align: middle;
-            font-size: 1.4rem;
+            font-size: 14px;
         }
 
         .board_write .title dt,
@@ -236,9 +384,27 @@
             resize: vertical;
         }
 
+
     </style>
+
 </head>
+
 <body>
+<section style="position: fixed; width: 1442px; margin: auto; top: 0;left: 0;right: 0; z-index: 999999">
+    <nav class="shift">
+        <div style="float: left; margin-top: 15px; margin-left: 50px; margin-right: 10px"><a href="indexnew.html">
+            <img src="/static/logo.png" width="104" alt="휴먹">
+        </a></div>
+        <ul style="padding-top: 15px">
+            <li><a href="indexnew.html">Home</a></li>
+            <li><a href="boardnew.html">먹거리 제안하기</a></li>
+            <li><a href="introduce_member.html">팀 소개</a></li>
+        </ul>
+        <hr style="width:100%;text-align:left;margin-left:0; margin-bottom: 0">
+    </nav>
+</section>
+
+<section>
     <div class="board_wrap">
         <div class="board_title">
             <strong>제안하기</strong>
@@ -246,13 +412,13 @@
         </div>
         <div class="board_write_wrap">
             <div class="board_write">
-                <div class="title">
+                <div class="title" style="padding-bottom: 0;margin-top: 10px">
                     <dl>
                         <dt>제목</dt>
                         <dd><input type="text" placeholder="제목 입력"></dd>
                     </dl>
                 </div>
-                <div class="info">
+                <div class="info" style="margin-top: 2px; padding-bottom: 0">
                     <dl>
                         <dt>글쓴이</dt>
                         <dd><input type="text" placeholder="글쓴이 입력"></dd>
@@ -277,16 +443,16 @@
                 </div>
                 <div class="cont">
                     <textarea placeholder="한마디입력"></textarea>
-                </div>                
+                </div>
             </div>
-            <div class="bt_wrap">
-                <a class="on">등록</a>
-                <a>취소</a>
+            <div style="margin: auto; text-align: center;margin-top: 30px;">
+                <button style="width: 100px" type="button" class="btn btn-outline-danger">취소</button>
+                <button style="width: 100px" type="button" class="btn btn-danger">등록</button>
             </div>
         </div>
         <br>
         <br>
-        <div class="board_list_wrap">
+        <div class="board_list_wrap" style="margin-top: 50px">
             <div class="board_list">
                 <div class="top">
                     <div class="num">번호</div>
@@ -333,7 +499,36 @@
             </div>
         </div>
     </div>
-    
-</body>
+</section>
 
-</html> 
+
+<div class="footer-dark">
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>Service</h3>
+                    <ul>
+                        <li><a href="indexnew.html">홈</a></li>
+                        <li><a href="boardnew.html">먹거리 제안하기</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="introduce_member.html">팀 소개</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 item text">
+                    <h3>달밤코딩조</h3>
+                    <p>2021년 9월 3일 5명의 열정적인 내일배움단 팀원들이 모여 만든 조이다. 전국 모든 휴게소에 대한 데이터를 축적하는 것을 목표로 하고 있으며 매일 밤 목표를 위해 열코를
+                        진행중인 팀이다.</p>
+                </div>
+                <p class="copyright">달밤코딩조 © 2021</p>
+            </div>
+    </footer>
+</div>
+</body>
+<footer>
+
+</footer>
