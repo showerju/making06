@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>좋아용!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+        div {
+            float:
+        }
+
+        .recommend {
+            padding-top: 40px;
+            padding-left: 80px;
+            padding-right: 80px;
+            position: relative;
+            width: 602px;
+            height: 300px;
+            margin: auto;
+        }
+
+        .recommend h1 {
+            font-size: 25px;
+            font-weight: bold;
+            margin: auto;
+        }
+
+    </style>
+    <script>
+        $(document).ready(function () {
+            showStar();
+        });
+
+        function showStar() {
+            $.ajax({
+                type: 'GET',
+                url: '/api/list?sample_give=샘플데이터',
+                data: {},
+                success: function (response) {
+                    let mystars = response['movie_stars']
+                    for (let i= 0; i < mystars.length; i++){
+                        let image =mystars[i]['image']
+                        let url=mystars[i]['url']
+                         let name =mystars[i]['name']
+                        let like =mystars[i]['like']
+
+                        let temp_html =`<ul class="list-card" style="padding-left: 0px;float: left;">
+            <ul>
+                <div>
+                    <img src="${image}" alt="alternatetext" class="img">
+                </div>
+                <div class="txt-area">${name}&nbsp&nbsp&nbsp👍:${like}<span>
+                <footer class="card-footer">
+                    <a href="#" onclick="likeStar('${name}')" class="card-footer-item has-text-dark">
+                       👍좋아요👍
+                        <span class="icon">
+              <i class=""></i>
+            </span>
+                    </a>
+                    <a href="${url}" onclick="deleteStar('${name}')" class="card-footer-item has-text-dark">
+                        🏯맛집탐방🏯
+                        <span class="icon">
+              <i class=""></i>
+            </span>
+                    </a>
+                </footer>
+            </ul>`
+                        $('#star-box').append(temp_html)
+                    }
+                }
+            });
+        }
+
+        function likeStar(name) {
+            $.ajax({
+                type: 'POST',
+                url: '/api/like',
+                data: {name_give:name},
+                success: function (response) {
+                    alert(response['msg']);
+                    window.location.reload()
+                }
+            });
+        }
+
+        function deleteStar(name) {
+            $.ajax({
+                type: 'POST',
+                url: '/api/delete',
+                data: {sample_give: '샘플데이터'},
+                success: function (response) {
+                    alert(response['msg']);
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+
+<section class="recommend">
+    <h1>
+        가장 많이 찾는 휴게소 Top 3 >
+    </h1>
+
+       <div class="box" id="star-box">
+
+            </div>
+
+</section>
+
+</body>
+</html>
