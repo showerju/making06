@@ -45,12 +45,12 @@
                 url: '/api/list',
                 data: {},
                 success: function (response) {
-                    let mystars = response['movie_stars']
-                    for (let i = 0; i < mystars.length; i++) {
-                        let image = mystars[i]['image']
-                        let url = mystars[i]['url']
-                        let name = mystars[i]['name']
-                        let like = mystars[i]['like']
+                    let myhighway = response['movie_stars']
+                    for (let i = 0; i < myhighway.length; i++) {
+                        let image = myhighway[i]['image']
+                        let url = myhighway[i]['url']
+                        let name = myhighway[i]['name']
+                        let like = myhighway[i]['like']
 
                         let temp_html = `<ul class="list-card" style="padding-left: 0px;float: left;">
                                             <li>
@@ -62,7 +62,7 @@
                                                     <button onclick="location.href='${url}';" target="_blank" type="button" class="btn btn-danger" style="width: 150px;float: left;margin-right: 10px">맛집
                                                         탐방하기
                                                     </button>
-                                                    <button href="#" onclick="likeStar('${name}')" type="button" class="btn btn-primary" style="width:96px">👍🏻 ${like}</button>
+                                                    <button onclick="likeHighway('${name}')" type="button" class="btn btn-primary" style="width:96px">👍🏻 ${like}</button>
                                                 </div>
                                             </li>
                                         </ul>`
@@ -73,7 +73,7 @@
             });
         }
 
-        function likeStar(name) {
+        function likeHighway(name) {
             $.ajax({
                 type: 'POST',
                 url: '/api/like',
