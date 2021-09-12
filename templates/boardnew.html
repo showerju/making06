@@ -28,8 +28,60 @@
             src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xlkaszxuya"></script>
 
     <script language="javascript"> function showPopup() {
-        window.open("info_popup.html", "a", "width=800px, height=900px, left=100, top=50");
-    } </script>
+            window.open("info_popup.html", "a", "width=800px, height=900px, left=100, top=50");
+        } </script>
+
+        <script type="text/javascript">
+        $(document).ready(function () {
+        $("#boards-box").html("");
+        showReview();
+    });
+
+    function makeboard() {
+        let title = $('#title').val()
+        let writer = $('#writer').val()
+        let pw = $('#pw').val()
+        let raomane = $('#raomane').val()
+        let memo = $('#memo').val()
+
+        $.ajax({
+            type: "POST",
+            url: "/board",
+            data: {title_give:title,writer_give:writer,pw_give:pw,raomane_give:raomane,memo_give:memo},
+            success: function (response) {
+                alert(response["msg"]);
+                window.location.reload();
+            }
+        })
+    }
+
+    function showReview() {
+        $.ajax({
+            type: "GET",
+            url: "/board",
+            data: {},
+            success: function (response) {
+                let boards = response['all_boards']
+                for (let i = 0; i < boards.length; i++) {
+                    let title = boards[i]['title']
+                    let writer = boards[i]['writer']
+                    let pw = boards[i]['pw']
+                    let raomane = boards[i]['raomane']
+                    let memo = boards[i]['memo']
+
+                    let temp_html = `
+                                    <div class="num">1</div>
+                                    <div class="title">${title}</a></div>
+                                    <div class="writer">${writer}</div>
+                                    <div class="date">2021.1.15</div>
+                                    <div class="count">33</div>
+                                    `
+                    $('#board-box').append(temp_html)
+                }
+            }
+        })
+    }
+    </script>
 
     <style>
         nav {
