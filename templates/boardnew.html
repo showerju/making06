@@ -24,63 +24,54 @@
 
     <title>휴게소를 먹다</title>
 
-    <script type="text/javascript"
-            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xlkaszxuya"></script>
+    <script type="text/javascript">
 
-    <script language="javascript"> function showPopup() {
-            window.open("info_popup.html", "a", "width=800px, height=900px, left=100, top=50");
-        } </script>
-
-        <script type="text/javascript">
         $(document).ready(function () {
-        $("#boards-box").html("");
-        showReview();
-    });
+            showrecommend();
+        });
 
-    function makeboard() {
-        let title = $('#title').val()
-        let writer = $('#writer').val()
-        let pw = $('#pw').val()
-        let raomane = $('#raomane').val()
-        let memo = $('#memo').val()
+        function writerecommend() {
+            let title = $('#title').val()
+            let writer = $('#writer').val()
+            let highway = $('#highway').val()
+            let comment = $('#comment').val()
 
-        $.ajax({
-            type: "POST",
-            url: "/board",
-            data: {title_give:title,writer_give:writer,pw_give:pw,raomane_give:raomane,memo_give:memo},
-            success: function (response) {
-                alert(response["msg"]);
-                window.location.reload();
-            }
-        })
-    }
-
-    function showReview() {
-        $.ajax({
-            type: "GET",
-            url: "/board",
-            data: {},
-            success: function (response) {
-                let boards = response['all_boards']
-                for (let i = 0; i < boards.length; i++) {
-                    let title = boards[i]['title']
-                    let writer = boards[i]['writer']
-                    let pw = boards[i]['pw']
-                    let raomane = boards[i]['raomane']
-                    let memo = boards[i]['memo']
-
-                    let temp_html = `
-                                    <div class="num">1</div>
-                                    <div class="title">${title}</a></div>
-                                    <div class="writer">${writer}</div>
-                                    <div class="date">2021.1.15</div>
-                                    <div class="count">33</div>
-                                    `
-                    $('#board-box').append(temp_html)
+            $.ajax({
+                type: "POST",
+                url: "/boardnew",
+                data: {title_give: title, writer_give: writer, highway_give: highway, comment_give: comment},
+                success: function (response) {
+                    alert(response["msg"]);
+                    window.location.reload();
                 }
-            }
-        })
-    }
+            })
+        }
+
+        function showrecommend() {
+
+            $.ajax({
+                type: "GET",
+                url: "/boardnew",
+                data: {},
+                success: function (response) {
+                    let recommendations = response['all_recommendation']
+                    for (let i = 0; i<recommendations.length; i++) {
+                        let title = recommendations[i]['title']
+                        let writer = recommendations[i]['writer']
+                        let highway = recommendations[i]['highway']
+                        let comment = recommendations[i]['comment']
+
+                        let temp_html = `<div>
+                                            <div class="num">5</div>
+                                            <div class="title">${title}</a></div>
+                                            <div class="writer">${writer}</div>
+                                            <div class="date">2021.1.15</div>
+                                            <div class="count">33</div>
+                                        </div>`
+                    }
+                }
+            })
+        }
     </script>
 
     <style>
@@ -467,13 +458,13 @@
                 <div class="title" style="padding-bottom: 0;margin-top: 10px">
                     <dl>
                         <dt>제목</dt>
-                        <dd><input type="text" placeholder="제목 입력"></dd>
+                        <dd><input type="text" placeholder="제목 입력" id="title"></dd>
                     </dl>
                 </div>
                 <div class="info" style="margin-top: 2px; padding-bottom: 0">
                     <dl>
                         <dt>글쓴이</dt>
-                        <dd><input type="text" placeholder="글쓴이 입력"></dd>
+                        <dd><input type="text" placeholder="글쓴이 입력" id="writer"></dd>
                     </dl>
                     <dl>
                         <dt>비밀번호</dt>
@@ -483,7 +474,7 @@
                 <div class="info1">
                     <dl>
                         <dt>휴게소선택</dt>
-                        <dd><input type="text" placeholder="휴게소이름"></dd>
+                        <dd><input type="text" placeholder="휴게소이름" id="highway"></dd>
                     </dl>
                     <dl>
                         <dt>방향</dt>
@@ -494,19 +485,19 @@
                     </dl>
                 </div>
                 <div class="cont">
-                    <textarea placeholder="한마디입력"></textarea>
+                    <textarea placeholder="한마디입력" id="comment"></textarea>
                 </div>
             </div>
             <div style="margin: auto; text-align: center;margin-top: 30px;">
                 <button style="width: 100px" type="button" class="btn btn-outline-danger">취소</button>
-                <button style="width: 100px" type="button" class="btn btn-danger">등록</button>
+                <button onclick="writerecommend()" style="width: 100px" type="button" class="btn btn-danger">등록</button>
             </div>
         </div>
         <br>
         <br>
         <div class="board_list_wrap" style="margin-top: 50px">
             <div class="board_list">
-                <div class="top">
+                <div class="top" id="recommend-box">
                     <div class="num">번호</div>
                     <div class="title">제목</div>
                     <div class="writer">글쓴이</div>
