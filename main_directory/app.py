@@ -47,6 +47,25 @@ def showrecommend():
     recommendation = list(db.recommend.find({}, {'_id': False}))
     return jsonify({'all_recommendation': recommendation})
 
+@app.route('/api/list', methods=['GET'])
+def show_stars():
+    movie_star = list(db.lats1.find({}, {'_id': False}).sort("like", -1).limit(3))
+    return jsonify({'movie_stars': movie_star})
+
+
+@app.route('/api/like', methods=['POST'])
+def like_star():
+    name_receive = request.form['name_give']
+
+    target_star = db.lats1.find_one({'name': name_receive})
+    current_like = target_star['like']
+
+    new_like = current_like + 1
+
+    db.lats1.update_one({'name': name_receive}, {'$set': {'like': new_like}})
+
+    return jsonify({'msg': '좋아요 완료!'})
+
 if __name__ == '__main__':
    app.run('0.0.0.0',port=5000,debug=True)
 
