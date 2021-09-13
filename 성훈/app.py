@@ -1,41 +1,20 @@
-from pymongo import MongoClient
-
 from flask import Flask, render_template, jsonify, request
-
 app = Flask(__name__)
 
+from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
 db = client.dbsparta
-
 
 # HTML 화면 보여주기
 @app.route('/')
 def home():
-    return render_template('index.html')
-
+    return render_template('indexnew.html')
 
 # API 역할을 하는 부분
 @app.route('/api/list', methods=['GET'])
 def show_stars():
-    movie_star = list(db.last.find({},{'_id':False}).sort("like",-1))
-    return jsonify({'movie_stars':movie_star})
-
-
-@app.route('/api/like', methods=['POST'])
-def like_star():
-    name_receive = request.form['name_give']
-
-    target_star = db.last.find_one({'name': name_receive})
-    current_like = target_star['like']
-
-    new_like= current_like + 1
-
-    db.last.update_one({'name': name_receive}, {'$set': {'like': new_like}})
-
-
-    return jsonify({'msg': '좋아요 완료!'})
-
-
+    pop = list(db.lats1.find({}, {'_id': False}))
+    return jsonify({'pop_star': pop})
 
 
 
