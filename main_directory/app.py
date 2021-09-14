@@ -30,12 +30,14 @@ def writerecommend():
     writer_receive = request.form['writer_give']
     highway_receive = request.form['highway_give']
     comment_receive = request.form['comment_give']
+    menu_receive = request.form['menu_give']
 
     doc = {
         'title':title_receive,
         'writer':writer_receive,
         'highway':highway_receive,
-        'comment':comment_receive
+        'comment':comment_receive,
+        'menu': menu_receive
     }
 
     db.recommend.insert_one(doc)
@@ -54,11 +56,11 @@ def show_stars():
 
 
 @app.route('/api/like', methods=['POST'])
-def like_star():
+def like_highway():
     name_receive = request.form['name_give']
 
-    target_star = db.lats1.find_one({'name': name_receive})
-    current_like = target_star['like']
+    target_highway = db.lats1.find_one({'name': name_receive})
+    current_like = target_highway['like']
 
     new_like = current_like + 1
 
