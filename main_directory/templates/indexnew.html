@@ -37,6 +37,7 @@
     <script>
         $(document).ready(function () {
             showhighway();
+            fast01();
         });
 
         function showhighway() {
@@ -451,63 +452,6 @@
     <div id="map" style="width:1000px;height:750px;margin: auto; margin-bottom: 50px"></div>
 </section>
 
-<section style="">
-    <div class="container">
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">팝업창 열기</button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <div>
-                                <div>
-                                    <img src="https://me2.kr/z8lz7" alt="이미지없음"
-                                         style="width: 466px;text-align: center; border-radius: 10px"/>
-                                    <div>
-                                        <p style="font-size: 25px; font-weight: bold; margin-top: 20px;margin-bottom: 5px">
-                                            순두부청국장&nbsp&nbsp<span
-                                                style="font-size: 15px; font-weight: normal">7,000원</span></p>
-                                        <hr class="hr_style">
-                                        <p>직접 만든 순두부로 맛과 영양을 잡았다! 옥산 순두부 청국장 냄새도 심하지 않고 간도 세지 않아 먹기 좋다 심지어 속도 편해 안 먹을 수가
-                                            없다!</p>
-                                        <hr class="hr_style">
-                                        <div style="line-height: 28px">
-                                            <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp옥산휴게소 (부산방향)</span>
-                                            </p>
-                                            <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span
-                                                    style="font-weight: normal"> &nbsp&nbsp충북 청주시 흥덕구 옥산면 경부고속도로 309</span>
-                                            </p>
-                                            <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp063-260-1053</span>
-                                            </P>
-                                            <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span
-                                                    style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>
-                                        </div>
-                                        <hr class="hr_style">
-                                        <span style="font-weight: bold">더 알고 싶다면?</span><a
-                                            href="https://goo.gl/maps/Go1XjzaqC96Dqx1Z7"> 상세보기</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">👍🏻 1</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-</section>
-
 
 <div class="footer-dark">
     <footer>
@@ -552,42 +496,870 @@
             var areaArr = new Array();  // 지역을 담는 배열 ( 지역명/위도경도 )
             areaArr.push(
                 /*지역구 이름*/			/*위도*/					/*경도*/
-                {location: '서울만남의광장휴게소(부산방향)', lat: '37.46025188399002', lng: '127.04196158084015'}, // 강남구 중심좌표
-                {location: '죽전휴게소(서울방향)', lat: '37.33238549545168', lng: '127.10481758612747'}, // 강동구 중심좌표
-                {location: '망향휴게소(부산방향)', lat: '36.85537668936837', lng: '127.18087158822793'}, // 강북구 중심좌표
-                {location: '옥산휴게소(부산방향)', lat: ' 36.65771392021131', lng: '127.36982000961997'},// 강서구 중심좌표
-                {location: '죽암휴게소(부산방향)', lat: '36.486780898348805', lng: '127.42926089180716'}, // 관악구 중심좌표
-                {location: '인삼랜드휴게소(하남방향)', lat: '36.15470488687423', lng: '127.49769187314587'}, // 광진구 중심좌표
-                {location: '이서휴게소(논산방향)', lat: '35.801952625742175', lng: '127.02576849590804'}, // 구로구 중심좌표
-                {location: '정읍녹두장군휴게소(논산방향)', lat: '35.59996750575727', lng: '126.8643325245416'}, // 금천구 중심좌표
-                {location: '보성녹차휴게소(순천방향)', lat: '34.80732155442688', lng: '127.18099379737176'}, // 노원구 중심좌표
-                {location: '횡성휴게소(강릉방향)', lat: '37.46275755519266', lng: '128.13396927867132'}, // 도봉구 중심좌표
-                {location: '천등산휴게소(평택방향)', lat: '37.07694893304106', lng: '127.98931943021573'}, // 동대문구 중심좌표
-                {location: '충주휴게소(양평방향)', lat: '37.02316775118798', lng: '127.83928679745476'}, // 동작구 중심좌표
-                {location: '괴산휴게소(양평방향)', lat: '36.83177713410066', lng: '127.96015439172078'}, // 마포구 중심좌표
-                {location: '군위휴게소(춘천방향)', lat: '36.265498301868476', lng: '128.57690233891032'}, // 서대문구 중심좌표
-                {location: '추풍령휴게소(서울방향)', lat: '36.19971559421238', lng: '128.00326067958855'}, // 서초구 중심좌표
-                {location: '영산휴게소(마산방향)', lat: '35.42978631538088', lng: '128.49589747336327'},  // 성동구 중심좌표
-                {location: '경주휴게소(부산방향)', lat: '35.724069216816254', lng: '129.19265470262897'}, // 성북구 중심좌표
-                {location: '진주휴게소(부산방향)', lat: '35.15973757516861', lng: '128.12198426703276'}, // 송파구 중심좌표
-                {location: '섬진강휴게소(부산방향)', lat: '34.984682931258625', lng: '127.77035093495383'},  // 양천구 중심좌표
-                {location: '기흥휴게소(부산방향)', lat: '37.23493644055473', lng: '127.1045459074627'}, // 영등포구 중심좌표
-                {location: '안성휴게소(부산방향)', lat: '37.013419735215436', lng: '127.14480747972593'},  // 용산구 중심좌표
-                {location: '여주휴게소(인천방향)', lat: '37.23974756508235', lng: '127.56995384444281'}, // 은평구 중심좌표
-                {location: '문경휴게소(창원방향)', lat: '36.62035936806056', lng: '128.1499245454857'}, // 종로구 중심좌표
-                {location: '속리산휴게소(청주방향)', lat: '36.44769458136483', lng: '127.86905587549954'}, // 중구 중심좌표
-                {location: '오창휴게소(통영방향)', lat: '36.758462471409324', lng: '127.48179634390809'}, // 중랑구 중심좌표
-                {location: '천안삼거리휴게소(서울방향)', lat: '36.78781395147762', lng: '127.1734366903498'}, // 중구 중심좌표
-                {location: '황간휴게소(부산방향)', lat: '36.24887451676956', lng: '127.85264887475222'}, // 중구 중심좌표
-                {location: '진안마이산휴게소 (익산방향)', lat: '35.777883600651634', lng: '127.42528370577209'},  // 중구 중심좌표
-                {location: '황전휴게소 (전주방향)', lat: '35.153237852851746', lng: '127.45448542868527'},
-                {location: '백양사휴게소 (천안방향)', lat: '35.39296566485018', lng: '126.80739638658395'},
-                {location: '칠곡휴게소(서울방향)', lat: '36.01179120077814', lng: '128.4308484668563'}, // 중구 중심좌표
-                {location: '성주휴게소(양평방향)', lat: '36.008584838611434', lng: '128.26111423587943'}, // 중구 중심좌표
-                {location: '안동휴게소(부산방향)', lat: '36.55317367335304', lng: ' 128.64190767726387'}, // 중구 중심좌표
-                {location: '진영휴게소(순천방향)', lat: '35.28007440717322', lng: '128.71601079471563'}, // 중구 중심좌표
-                {location: '산청휴게소(하남방향)', lat: '35.333498918746635', lng: '127.93899678012033'}, // 중구 중심좌표
-                {location: '통도사휴게소(부산방향)', lat: '35.4888534980784', lng: '129.09075599798786'} // 중구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/9mh1v" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">말죽거리소고기국밥&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">7,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">든든한 말죽거리 소고기국밥! 직접 우려낸 사골육수를 사용해 정성을 다해 만들어 한 숟가락 국물을 떠먹는 순간 속이 든든해지는 환상의 국밥을 몸으로 느낄 수 있다! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp경부고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp서울만남의광장휴게소(부산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp서울 서초구 양재대로12길 73-71</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp02-578-3372</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/cbfS9oFhpNR43ebK7"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '서울만남의광장휴게소(부산방향)', lat: '37.46025188399002', lng: '127.04196158084015'
+                }, // 강남구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/wdrut" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">죽전임금갈비탕&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">10,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">죽전 임금 갈비탕! 씹는 식감이 일품인 갈비가 아주 넉넉하게 들어가 있으며 직접 맛을 보면 입에 착착 감기는 깊은 맛과 믿기지 않을 정도로 부드러운 육질에 놀라실 겁니다!! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp경부고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp죽전휴게소(서울방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경기 용인시 수지구 경부고속도로 400 (죽전동 866-2번지)</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp031-262-3168</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/g9vbCSXQHKxAUMWb8"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '죽전휴게소(서울방향)', lat: '37.33238549545168', lng: '127.10481758612747'
+                }, // 강동구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/hi53b" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">명품닭개장&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">9,500원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">한국 도로공사 선정 대표 명품음식 명품 닭개장! 얼큰한 육수와 쫄깃한 닭에 조화로 입안에 넣는 순간 퍼지는 진한 맛 괜히 이영자가 먹은 게 아니다! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp경부고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp망향휴게소(부산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp충남 천안시 서북구 성거읍 돌다리길 23-37</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp041-557-4000</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/RAhdNbLNnV9no7SXA"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '망향휴게소(부산방향)', lat: '36.85537668936837', lng: '127.18087158822793'
+                }, // 강북구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/tsfrd" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">순두부청국장&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">7,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">직접 만든 순두부로 맛과 영양을 잡았다! 옥산 순두부 청국장 냄새도 심하지 않고 간도 세지 않아 먹기 좋다 심지어 속도 편해 안 먹을 수가 없다! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp경부고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp옥산휴게소(부산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp충북 청주시 흥덕구 옥산면 경부고속도로 309</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp063-260-1053</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/Go1XjzaqC96Dqx1Z7"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '옥산휴게소(부산방향)', lat: ' 36.65771392021131', lng: '127.36982000961997'
+                },// 강서구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/gmukk" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">보은대추왕갈비탕&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">11,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">천혜의 충북 보은대추와 프리미업 A급 송아지 왕갈비의 부드럽고 진한 명품 갈비탕 보은대추 왕갈비탕 너무너무 맛있다! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp경부고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp죽암휴게소(부산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp충북 청주시 서원구 현도면 경부고속도로 289</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp043-269-4434</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/BjJMumBpZ3ozMeVS8"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '죽암휴게소(부산방향)', lat: '36.486780898348805', lng: '127.42926089180716'
+                }, // 관악구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/2hrfr" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">인삼갈비탕&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">10,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">대중들이 선호하는 갈비탕에 인삼을 넣은 보양식 인삼갈비탕 인삼향 듬뿍 나는 국물은 내 몸에 건강을 보충해준다! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp통영대전고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp인삼랜드휴게소(하남방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp충남 금산군 군북면 대암길 34-30</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp041-754-5180</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.8 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/DR2n4x3mBuiRKgDp6"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '인삼랜드휴게소(하남방향)', lat: '36.15470488687423', lng: '127.49769187314587'
+                }, // 광진구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/1avqo" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">명품애호박국밥&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">8,500원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;"> 건강에 좋은 전라북도 명품 애호박을 푸짐하게 넣고, 국내산 돼지고기와 표고버섯을 추가해 감칠맛을 더한 남도식 돼지국밥! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp호남고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp이서휴게소 (논산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp전북 완주군 이서면 호남고속도로 162</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp063-236-2592</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/aZk6eu6DajBHEnEx8"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '이서휴게소(논산방향)', lat: '35.801952625742175', lng: '127.02576849590804'
+                }, // 구로구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/g6nhf" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">웰빙 우렁이 쌈밥정식&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">9,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">노화방지, 스태미나 증진!! 청정지역에서 길러낸 우렁이를 이용한 웰빙 건강식 웰빙 우렁이 쌈밥정식</p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp호남고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp정읍녹두장군휴게소(논산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp전북 정읍시 북면 하북1길 227-17</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp063-532-2373</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/ASsyyGRXr7GwNXxbA"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '정읍녹두장군휴게소(논산방향)', lat: '35.59996750575727', lng: '126.8643325245416'
+                }, // 금천구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/mjjzj" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">보성꼬막비빔밥&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">10,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">대체 불가 꼬막계의 왕중왕 별교 꼬막 넣었다! 새싹 양배추 등 싱싱한 채소들의 환상 궁합 보성 꼬막비빔밥!! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp목포광양고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp보성녹차휴게소 (순천방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp전남 보성군 겸백면 남해고속도로 70</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp070-4325-8808</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.8 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/NMKXaMfcqz6dYAFL8"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '보성녹차휴게소(순천방향)', lat: '34.80732155442688', lng: '127.18099379737176'
+                }, // 노원구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/pm2iq" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">한우떡더덕스테이크&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">10,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">더덕의 향과 소고기의 향이 어우러져 잘게 썰려 입안에 넣었을때 샤르르 녹는 힝성한우로 빚어낸 환상적인 콜라보레이션 </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp영동고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp횡성휴게소(강릉방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp강원 횡성군 안흥면 영동고속도로 154-1</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp033-342-4231</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.8 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/hYA8ixAWsqTmywKf6"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '횡성휴게소(강릉방향)', lat: '37.46275755519266', lng: '128.13396927867132'
+                }, // 도봉구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/vmnlw" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">산삼배왕근을 품은 삼계탕&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">12,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">삼계탕을 푸우욱~ 종산삼 dat와 99% 동일한 겨울이 오기전에 먹어야 할 산삼배양푼을 다~~~~ 할머니 마음으로 가득 담은 고봉밥 </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp평택제천고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp천등산휴게소 (평택방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp충북 충주시 산척면 평택제천고속도로 109</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp043-844-2930</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/Jh5j4Bm8kAjs4qwC7"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '천등산휴게소(평택방향)', lat: '37.07694893304106', lng: '127.98931943021573'
+                }, // 동대문구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/5zosy" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">한방 고추장 불고기&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">12,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">국내산 돼지고기를 청주사과와 한방 재료를 첨가한 고추장 앙념으로 요리하여 연육작용, 누린내 제거와 향을 살린 음식 </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp중부내륙고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp충주휴게소 (양평방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp충북 충주시 중앙탑면 중부내륙고속도로 230</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp043-857-9229</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/ihuUSL16jt8j2pic8"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '충주휴게소(양평방향)', lat: '37.02316775118798', lng: '127.83928679745476'
+                }, // 동작구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/45w2s" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">엄나무 닭곰탕&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">6,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">신선한 닭과 엄나루를 푹 고아서 만들어 자극적이지 않은 진하고 단백한 육수가 일품인 건강식 엄나무 닭곰탕!</p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp중부내륙고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp괴산휴게소 (양평방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp충북 괴산군 장연면 중부내륙고속도로 204</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp043-832-6594</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/jS2xqxRci5ZoYGEL9"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '괴산휴게소(양평방향)', lat: '36.83177713410066', lng: '127.96015439172078'
+                }, // 마포구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/vih4q" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">제비원된장찌개&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">8,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">안동 제비원 식품의 식품명인의 메주 기술제휴를 받아 휴게소에서 직접 담근 된장으로 정성껏 끓인 제비원 된장찌개 </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp중앙고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp군위휴게소 (춘천방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경북 군위군 군위읍 경북대로 4082</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp054-383-7114</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/FkLAvRQM7nxiXzVN7"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '군위휴게소(춘천방향)', lat: '36.265498301868476', lng: '128.57690233891032'
+                }, // 서대문구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/ti0xq" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">지례흑돼지석쇠불고기&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">10,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">지역에서 생산되는 양질의 토종 흑돼지를 갖은 양념에 재워 즉석에서 숯불로 구은 돼지불고기와 된짱찌게가 나오는 조합 </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp경부고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp추풍령휴게소 (서울방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경북 김천시 봉산면 경부고속도로 214-1</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp054-439-3187</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.6 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/VAVC1CDFPrGT38pz5"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '추풍령휴게소(서울방향)', lat: '36.19971559421238', lng: '128.00326067958855'
+                }, // 서초구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/huqc1" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">창녕 양파제육덮밥정식&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">9,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;"> 맛도 일품! 향도 일품! 창녕앙파의 품미가 가득한 창년양파제육덮밥 정식 </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp중부내륙고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp영산휴게소 (마산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경남 창녕군 영산면 신제리 1754-4</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp055-521-2978</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.6 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/ond4tqD1b9bfbmcKA"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '영산휴게소(마산방향)', lat: '35.42978631538088', lng: '128.49589747336327'
+                },  // 성동구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/gyx65" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">동태탕&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">8,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">주 산내지역 특산물인 산내미나리를 첨가해 시원한 국물 맛을 증가시키고 피로회복 및 다이어트 식품으로도 각광을 받고 있는 속까지 시원한 동태탕 </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp경부고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp경주휴게소 (부산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경북 경주시 내남면 경부고속도로 59</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp054-748-3195</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/FEdR3KUsDX3F9yRF9"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '경주휴게소(부산방향)', lat: '35.724069216816254', lng: '129.19265470262897'
+                }, // 성북구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/w56vd" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">진주 육전 비빔밥&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">9,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">진주 향토읍식인 담백한 육전과 신선한 채소 식감이 어울러진 영양만점 든든한 프리미엄 비빔밥 </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp남해고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp진주휴게소 (부산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경남 진주시 남해고속도로 194</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp055-759-3205</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/KTf668wiuXiEemjU9"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '진주휴게소(부산방향)', lat: '35.15973757516861', lng: '128.12198426703276'
+                }, // 송파구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/lrl2s" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">옛날 김치찌개&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">8,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">휴게소에서 즐기는 즉석 김치찌개! 시큼 매콤한 김치찌개 국물에 담백한 돼지고기로 화룡점정을 찍은 휴게소 최고의 식사! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp남해고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp섬진강휴게소 (부산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp전남 광양시 진월면 섬진강매화로 141</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp061-772-7986</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.8 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/FyZ7uUzqLEjQCSNM6"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '섬진강휴게소(부산방향)', lat: '34.984682931258625', lng: '127.77035093495383'
+                },  // 양천구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/tbwoa" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">소고기국밥&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">8,500원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">휴게소 국밥 로드 BEST 5! 깊은 맛의 육수에 밥 한 그릇 말아 먹는 든든한 국민음식 </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp경부고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp기흥휴게소 (부산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경기 용인시 기흥구 공세로 173</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp031-286-5001</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/WMBh7dMhiPrrLM4f7"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '기흥휴게소(부산방향)', lat: '37.23493644055473', lng: '127.1045459074627'
+                }, // 영등포구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/kb6bc" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">안성국밥&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">8,500원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">긴 운전 길 든든하게 먹을 수 있는 안성국밥! 실하게 들어있는 맛 좋은 고기와 얼큰한 국물의 조화를 느껴보자 </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp경부고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp안성휴게소 (부산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경기 안성시 원곡면 경부고속도로 365</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp031-655-0531</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/aNN3774if5T2Bh6p9"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '안성휴게소(부산방향)', lat: '37.013419735215436', lng: '127.14480747972593'
+                },  // 용산구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/drqp5" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">매운돼지갈비찜&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">9,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">이영자가 추천한 매운 돼지갈비찜 맛집! 두툼한 돼지고기에 넓적당면과 떡을 넣어 더욱 취향 저격! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp영동고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp여주휴게소 (인천방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경기 여주시 가남읍 화평길 116</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp031-882-2900</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/oMGKrmm3UxMTPNEr6"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '여주휴게소(인천방향)', lat: '37.23974756508235', lng: '127.56995384444281'
+                }, // 은평구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/w7pnf" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">전복왕갈비탕&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">12,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">장거리 운전으로 지친 운전자에게 딱! 가득한 왕갈비에 전복, 낙지, 대추, 버섯 등 기력 충전 맞춤형 음식! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp중부내륙고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp문경휴게소 (창원방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경북 문경시 중부내륙고속도로 173</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp054-554-1655</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.8 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/LprB8L4jnu9Fb4Us6"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '문경휴게소(창원방향)', lat: '36.62035936806056', lng: '128.1499245454857'
+                }, // 종로구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/q0nij" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">보은대추영양솥밥<span style="font-size: 15px; font-weight: normal">11,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;"> 각종 보양 음식을 넣어 향긋하게 지어낸 영양밥의 정석! 영양만점 보양식을 휴게소에서 즐겨보자! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp청주상주고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp속리산휴게소 (청주방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp충북 보은군 마로면 적암길 56-18</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp043-544-1466</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.8 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/NUczRynXhDs2qkpp6"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '속리산휴게소(청주방향)', lat: '36.44769458136483', lng: '127.86905587549954'
+                }, // 중구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/as8l1" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">능이버섯인삼설렁탕&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">10,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;"> 몸에 좋은 건 모두 모아 뜨끈한 사골 국물 속으로! 여행도 하고 몸보신도 하고 두 마리 토끼를 전부 잡아보자!</p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp중부고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp오창휴게소 (통영방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp충북 청주시 청원구 오창읍 중부고속도로 21</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp043-217-1477</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.6 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/ovXgAQKnhTo6Y4ys5"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '오창휴게소(통영방향)', lat: '36.758462471409324', lng: '127.48179634390809'
+                }, // 중랑구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/n4psd" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">해주비빔밥&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">10,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;"> 황해도의 대표 음식 해주 비빔밥! 아름다운 색감의 다양한 나물로 눈으로 한 번 입으로 한 번 오감으로 즐길 수 있다! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp경부고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp천안삼거리휴게소(서울방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp충남 천안시 동남구 쉼1길 42</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp041-551-2480</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/bkZ35Xa86y9BtBkD7"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '천안삼거리휴게소(서울방향)', lat: '36.78781395147762', lng: '127.1734366903498'
+                }, // 중구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/5wa5f" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">영표국밥&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">6,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">향긋한 영동 표고버섯 향과 푸짐한 건더기로 속을 든든하게! 국밥 속 영동 표고버섯 향을 느껴보세요! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp경부고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp황간휴게소(부산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp충북 영동군 황간면 회포길 102</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp043-742-5805</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.6 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/1FXeHXUNPeabUEVS6"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '황간휴게소(부산방향)', lat: '36.24887451676956', lng: '127.85264887475222'
+                }, // 중구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/ay8fb" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">마이산더덕비빔밥&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">9,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">씹을 때 아삭아삭한 식감과 은은한 향기가 매력적인 진안지역 특산품인 더덕을 활용한 건강 비빔밥! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp익산장수고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp진안마이산휴게소 (익산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp전북 진안군 진안읍 익산장수고속도로 41</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp063-432-1380</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.8 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/ZpmFvHsW41Gib28P7"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '진안마이산휴게소 (익산방향)', lat: '35.777883600651634', lng: '127.42528370577209'
+                },  // 중구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/yjscy" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">황전해초꼬막비빔밥&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">10,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">한 입 크게 떠서 입안에 넣는 순간 상큼한 해초향이 확 나는 식욕 충전 비빔밥! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp순천완주고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp황전휴게소 (전주방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp전남 순천시 황전면 순천완주고속도로 28</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp061-782-1154</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.8 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/Zekdz7dJ6c7PTBDL9"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '황전휴게소 (전주방향)', lat: '35.153237852851746', lng: '127.45448542868527'
+                },
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/34hgt" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">삼채애호박찌개&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">7,500원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">인삼 뿌리와 애호박 돼지고기까지! 시원하게 속을 뻥 뚫어주는 매콤 칼칼한 애호박 찌개! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp호남고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp백양사휴게소 (천안방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp전남 장성군 북일면 호남고속도로 108</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp061-394-5177</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/Gf2F95n8nMjPauXQ7"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '백양사휴게소 (천안방향)', lat: '35.39296566485018', lng: '126.80739638658395'
+                },
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/b0zv1" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">칠곡벌꿀소머리곰탕&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">9,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;"> 소의 머리고기를 여러번 우려내어 깊은 맛을 느낄 수 있는 곰탕에 칠곡 특산품 벌꿀까지! 곰탕계의 혁명이다! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp경부고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp칠곡휴게소(서울방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경북 칠곡군 왜관읍 경부고속도로 158 (아곡리 138번지)</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp054-975-1883</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.8 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/D3Bd1kvwGnbQBiUg7"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '칠곡휴게소(서울방향)', lat: '36.01179120077814', lng: '128.4308484668563'
+                }, // 중구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/qsi4u" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">고추장제육볶음&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">8,500원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">집밥의 표본 제육볶음! 이제는 휴게소에서도 맛볼 수 있다? </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp중부내륙고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp성주휴게소(양평방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경북 성주군 초전면 중부내륙고속도로 98</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp054-933-0800</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.8 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/by82NGS9SdzbfKs59"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '성주휴게소(양평방향)', lat: '36.008584838611434', lng: '128.26111423587943'
+                }, // 중구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/z8lz7" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">이동삼안동간고등어정식<span style="font-size: 15px; font-weight: normal">10,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">대한민국 밥도둑 하나 더 추가요! 한입 뜯어 먹으면 잊을 수 없는 짭짤 단백한 고등어 구이! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp중앙고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp안동휴게소 (부산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경북 안동시 풍산읍 풍산태사로 1903-27</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp054-853-4370</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/FZGYpcAnAvBNNodAA"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '안동휴게소(부산방향)', lat: '36.55317367335304', lng: ' 128.64190767726387'
+                }, // 중구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/uyp1a" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">장군차생고기김치찌개&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">7,500원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">김해 지역 특산품 장군차를 푹 끓인 물에 김치찌개를 끓였다! 돼지의 잡내가 전혀 없는 얼큰한 김치찌개! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp남해고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp진영휴게소 (순천방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경남 김해시 진영읍 하계로96번길 68</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp055-342-3959</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/GbbEjRyRSatRrdDK7"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '진영휴게소(순천방향)', lat: '35.28007440717322', lng: '128.71601079471563'
+                }, // 중구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/uhoc0" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">한방우불고기&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">9,000원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">인삼, 당귀, 대추를 아낌없이 넣어 정성스럽게 만들어진 한방우불고기! 한 입 먹는 순간 휴게소에서 맛볼 수 없는 깊고 진한 맛이 펼쳐진다! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp통영대전고속</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp산청휴게소 (하남방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경남 산청군 단성면 통영대전고속도로 76</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp055-973-1703</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.8 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/AS5EYgNoFDcoog3T9"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '산청휴게소(하남방향)', lat: '35.333498918746635', lng: '127.93899678012033'
+                }, // 중구 중심좌표
+                {
+                    ID: '<div class=\'wrap\'>\n' +
+                        '        <div class="box_card" id="card_box">\n' +
+                        '            <div class="card">\n' +
+                        '                <img class="card_image" src="https://me2.kr/wwl7r" alt="이미지없음"/>\n' +
+                        '                <div class="card_text">\n' +
+                        '                    <p style="font-size: 20px; font-weight: bold;">명품낙지덮밥&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">9,500원</span></p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <p style="font-size: 15px;">조방낙지에서 착안한 15가지 재료를 듬뿍 넣어 양념장을 만든 낙지볶음과 따뜻한 흰 쌀밥의 조화! </p>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <div style="line-height: 15px" >\n' +
+                        '                         <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp경부고속도로</span></p>\n  ' +
+                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp통도사휴게소 (부산방향)</span></p>\n' +
+                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp경남 양산시 하북면 경부고속도로 31-1</span></p>\n' +
+                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp055-383-6145</span></P>\n' +
+                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.8 ★★★★☆</span></p>\n' +
+                        '                    </div>\n' +
+                        '                    <hr class="hr_style">\n' +
+                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/PwaPhQXQZ5CbDxd2A"> 상세보기</a>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '</div>', location: '통도사휴게소(부산방향)', lat: '35.4888534980784', lng: '129.09075599798786'
+                } // 중구 중심좌표
 
             );
 
@@ -611,9 +1383,7 @@
                 });
 
                 /* 정보창 */
-                var infoWindow = new naver.maps.InfoWindow({
-                    content: '<div class="aa" style="width:400px;text-align:center;padding:10px;"><b>' + areaArr[i].location + '</b><br> <input type="button" value="휴게소더알아보기" onclick="showPopup();"/> </div>'
-                });
+                var infoWindow = new naver.maps.InfoWindow({content: '<div class="aa" style="width:400px;text-align:center;padding:10px;"><b>' + areaArr[i].ID + ''});
 
 //             '<div class="iw_inner">',
 //       <h3>서울만남의관장휴게소(부산)</h3>',
@@ -652,6 +1422,38 @@
                 console.log(markers[i], getClickHandler(i));
                 naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i)); // 클릭한 마커 핸들러
             }
+        }
+
+        <!-- 길그리기 기본 -->
+        var polyline = new naver.maps.Polyline({
+            map: map,
+            path: []
+        });
+
+        /* polyline의 path를 가져오는 방법 */
+        var path = polyline.getPath();
+
+        function fast01() {
+            $.ajax({
+                type: "GET",
+                url: "/main",
+                data: {},
+                success: function (response) {
+                    let latlng = response["latlng_all"];
+                    for (let i = 0; i < latlng.length; i++) {
+                        /* 좌표 최적화 */
+                        if (i % 4 != 0) {
+                            continue;
+                        } else {
+                            let lat = latlng[i]['lat']
+                            let lng = latlng[i]['lng']
+                            /* 좌표를 받아서 path에 push */
+                            path.push(new naver.maps.LatLng(lat, lng),)
+                            console.log(lat, lng)
+                        }
+                    }
+                }
+            })
         }
 
     </script>
