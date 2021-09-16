@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>뭐였더라?</title>
+    <title>휴게소를 먹다</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -82,6 +82,11 @@
                     alert(response['msg']);
                 }
             });
+        }
+
+        function alert()
+        {
+            alert("준비중입니다.");
         }
 
     </script>
@@ -427,16 +432,8 @@
         <p>여행의 시작과 끝만 알려주세요 <br>맛집은 휴먹이 찾을게요 </p>
 
     </div>
-
-    <form>
-        <label for="fname" style="font-weight: bold">출발지</label>
-        <input type="text" id="fname" name="fname" style="margin-right: 25px">
-        <label for="lname" style="font-weight: bold">목적지</label>
-        <input type="text" id="lname" name="lname" style="margin-right: 25px">
-        <button type="button" class="btn btn-dark" style="padding: 6px 20px; margin-bottom: 4px">맛집 검색</button>
-    </form>
-    <div id="floating-panel">
-      <b>고속도로를 선택해 주세요: </b>
+    <div id="floating-panel" style="margin-top: 20px;font-size: 20px; margin-bottom: 20px;">
+      <b><span>고속도로를 선택해 주세요: </b>
       <select id="mode" onchange="select_highway()">
         <option value="0">고속도로를 선택해 주세요.</option>
         <option value="1">경부고속도로</option>
