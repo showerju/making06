@@ -1,247 +1,265 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-     <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <title>스파르타코딩클럽 | 맛집 검색</title>
+        <script type="text/javascript"
+                src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=내클라이언트아이디넣기&submodules=geocoder"></script>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
               crossorigin="anonymous">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-        <!-- JS -->
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
                 integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
                 crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+        <style>
+            .wrap {
+                width: 90%;
+                max-width: 750px;
+                margin: 0 auto;
+            }
 
-    <title>나홀로 링크 메모장</title>
-</head>
-    <style>
-        @font-face { font-family: 'MaruBuri-Regular';
-                     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
-                     font-weight: normal;
-                     font-style: normal; }
-        *{
-            font-family: 'MaruBuri-Regular', verdana, tahoma;
-        }
+            .banner {
+                width: 100%;
+                height: 20vh;
+                background-image: url("{{ url_for("static", filename="banner.jpg") }}");
+                background-position: center;
+                background-size: contain;
+                background-repeat: repeat;
 
-        .text_size10pt{
-            font-size: 10pt;
-        }
+            }
 
-        .text_color {
-            color: #0f77bb;
-            font-weight: bold;
-        }
+            h1.title {
+                font-family: 'Jua', sans-serif;
 
-        .wrap{
-            width: 900px;
-            margin: auto;
-        }
-        .top_box{
-            background-color: #f3f3f3;
-            margin:30px auto;
-            /*시계방향으로 padding 순서 top right bottom left */
-            padding: 80px 50px;
-            border-radius: 5px;
-        }
-        .line{
-            line-height: 40px;
-        }
-        .button_style01{
-            background-color: #379bff;
-            color: white;
-            font-weight: bold;
-            padding: 12px;
-            border-radius: 3px;
-            margin-top: 10px;
-            cursor: pointer;
-            border: none;
-        }
-        button:hover{
-            background-color: #2a75c0;
-        }
-        button:focus{
-            animation-name: btfocus;
-            animation-duration: 0.08s;
-            animation-fill-mode: forwards;
-        }
-        @keyframes btfocus {
-            from{
-                outline: none;
-                box-shadow: 0 0 0px 0pt #7ac3ff;
-            } to{
-                outline: none;
-                box-shadow: 0 0 1px 2pt #7ac3ff;
-              }
-        }
+                color: white;
+                font-size: 3rem;
+            }
 
-        .middle_box{
-            border: black solid;
-            border-radius: 5px;
-            margin: 30px auto;
-            width: 500px;
-            display: none;
-        }
+            h5 {
+                font-family: 'Jua', sans-serif;
+            }
 
-        .middle_text{
-            padding: 40px 60px;
-        }
+            .matjip-list {
+                overflow: scroll;
+                width: 100%;
+                height: calc(20vh - 30px);
+                position: relative;
+            }
 
-        .middle_input01{
-            width: 380px;
-            height: 35px;
-            border-radius: 4px;
-            border: 1px solid lightgray;
-        }
-        input:focus{
-            animation-name: infocus;
-            animation-duration: 0.08s;
-            animation-fill-mode: forwards;
-        }
+            .card-title, .card-subtitle {
+                display: inline;
+            }
 
-        .middle_input02{
-            width: 380px;
-            border-radius: 4px;
-            border: 1px solid lightgray;
-        }
-        textarea:focus{
-            animation-name: infocus;
-            animation-duration: 0.08s;
-            animation-fill-mode: forwards;
-        }
-        @keyframes infocus {
-            from{
-                border: 1px solid #4996ee;
-                border-radius: 4px;
-                outline: none;
-                box-shadow: 0 0 0px 0pt #8cb1ef;
-            } to{
-                border: 1px solid #4996ee;
-                border-radius: 4px;
-                outline: none;
-                box-shadow: 0 0 1px 2pt #7ac3ff;
-              }
-        }
+            #map {
+                width: 100%;
+                height: 50vh;
+                margin: 20px auto 20px auto;
+            }
 
-        .box_card {
-            width: 100%;
-            margin: auto auto auto 5px;
-            /*  card float의 margin-left가 10px 씩 두번이니까 20px를 줘봤더니 맞았음  */
-        }
+            .btn-sparta {
+                color: #fff;
+                background-color: #e8344e;
+                border-color: #e8344e;
+            }
 
-        .card {
-            float:left;
-            width: 30%;
-            border: 1px solid lightgray;
-            margin-left: 20px;
-            margin-bottom: 10px;
-        }
-        .card-text{
-            padding: 20px 20px 5px 20px;
-        }
+            .iw-inner {
+                padding: 10px;
+                font-size: smaller;
+            }
 
+            i {
+                color: #e8344e;
+            }
 
-    </style>
-    <script>
-        $(document).ready(function () {
-                showpost();
+            i:hover {
+                cursor: pointer;
+            }
+        </style>
+        <script>
+            let y_cen = 37.4981125;   // lat
+            let x_cen = 127.0379399;  // long
+            let map;
+            let markers = [];
+            let infowindows = [];
+            $(document).ready(function () {
+                map = new naver.maps.Map('map', {
+                    center: new naver.maps.LatLng(y_cen, x_cen),
+                    zoom: 12,
+                    zoomControl: true,
+                    zoomControlOptions: {
+                        style: naver.maps.ZoomControlStyle.SMALL,
+                        position: naver.maps.Position.TOP_RIGHT
+                    }
+                });
+
+                get_matjips()
             });
 
-        function posting_box(){
-            if($(`#posting_box`).css("display") == "none"){
-                $(`#posting_bt`).text('포스팅박스 닫기')
-                $(`#posting_box`).show();
-            }else{
-                $(`#posting_bt`).text('포스팅박스 열기')
-                $(`#posting_box`).hide();
-            }
-        }
+            function get_matjips() {
+                $('#matjip-box').empty();
+                for (let i = 0; i < markers.length; i++) {
+                    markers[i].setMap(null);
+                    infowindows[i].close()
+                }
+                markers = [];
+                infowindows = [];
 
-        function posting() {
-            let url = $(`#article_input`).val()
-            let comment = $(`#comment_input`).val()
-
-                $.ajax({
-                    type: "POST",
-                    url: "/memo",
-                    data: {url_give:url,comment_give:comment},
-                    success: function (response) {
-                        console.log(url,comment)
-                        alert(response["msg"]);
-                        window.location.reload();
-                    }
-                })
-            }
-        function showpost() {
                 $.ajax({
                     type: "GET",
-                    url: "/memo",
+                    url: `/matjip`,
                     data: {},
                     success: function (response) {
-                        let movies = response['movie_list']
-                        for (i=0; i<movies.length; i++){
-                            let title = movies[i]['title']
-                            let image = movies[i]['img']
-                            let url = movies[i]['url']
-                            let desc = movies[i]['desc']
-                            let comment = movies[i]['comment']
+                        let matjips = response["matjip_list"];
+                        console.log(matjips.length);
+                        for (let i = 0; i < matjips.length; i++) {
+                            let matjip = matjips[i];
+                            make_card(i, matjip);
+                            let marker = make_marker(matjip);
+                            add_info(i, marker, matjip)
+                        }
+                    }
+                });
+            }
 
-                            let temp_html = `<div class="card">
-                                                 <img src="${image}"/>
-                                                 <div class="card-text">
-                                                     <a href="${url}">${title}</a>
-                                                     <p>${desc}</p>
-                                                     <p class="text_color">${comment}</p>
-                                                 </div>
-                                             </div>`
+            function make_marker(matjip) {
+                let marker_img = '';
+                if ("liked" in matjip) {
+                    marker_img = '{{ url_for("static", filename="marker-liked.png") }}'
+                } else {
+                    marker_img = '{{ url_for("static", filename="marker-default.png") }}'
+                }
+                let marker = new naver.maps.Marker({
+                    position: new naver.maps.LatLng(matjip["mapy"], matjip["mapx"]),
+                    map: map,
+                    icon: marker_img
+                });
+                markers.push(marker);
+                return marker
+            }
 
-                            $(`#card_box`).append(temp_html)
+            function make_card(i, matjip) {
+                let html_temp = ``;
+                if ("liked" in matjip) {
+                    html_temp = `<div class="card" id="card-${i}">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><a href="javascript:click2center(${i})" class="matjip-title">${matjip['title']}</a></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">${matjip['category']}</h6>
+                                        <i class="fa fa-bookmark" onclick="bookmark('${matjip['title']}', '${matjip['address']}', 'unlike')"></i>
+                                        <p class="card-text">${matjip['address']}</p>
+                                        <p class="card-text" style="color:blue;">${matjip['show']}</p>
+                                    </div>
+                                 </div>`;
+                } else {
+                    html_temp = `<div class="card" id="card-${i}">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><a href="javascript:click2center(${i})" class="matjip-title">${matjip['title']}</a></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">${matjip['category']}</h6>
+                                        <i class="fa fa-bookmark-o" onclick="bookmark('${matjip['title']}', '${matjip['address']}', 'like')"></i>
+                                        <p class="card-text">${matjip['address']}</p>
+                                        <p class="card-text" style="color:blue;">${matjip['show']}</p>
+                                    </div>
+                                 </div>`;
+                }
+
+
+                $('#matjip-box').append(html_temp);
+            }
+
+            function add_info(i, marker, matjip) {
+                let html_temp = `<div class="iw-inner">
+                                    <h5>${matjip['title']}</h5>
+                                    <p>${matjip['address']}
+                                    </div>`;
+                let infowindow = new naver.maps.InfoWindow({
+                    content: html_temp,
+                    maxWidth: 200,
+                    backgroundColor: "#fff",
+                    borderColor: "#888",
+                    borderWidth: 2,
+                    anchorSize: new naver.maps.Size(15, 15),
+                    anchorSkew: true,
+                    anchorColor: "#fff",
+                    pixelOffset: new naver.maps.Point(10, -10)
+                });
+                infowindows.push(infowindow);
+                naver.maps.Event.addListener(marker, "click", function (e) {
+                    console.log("clicked", infowindows.length);
+                    if (infowindow.getMap()) {
+                        infowindow.close();
+                    } else {
+                        infowindow.open(map, marker);
+                        map.setCenter(infowindow.position);
+                        $("#matjip-box").animate({
+                            scrollTop: $("#matjip-box").get(0).scrollTop + $(`#card-${i}`).position().top
+                        }, 2000);
+                    }
+                });
+            }
+
+            function click2center(i) {
+                let marker = markers[i];
+                let infowindow = infowindows[i];
+                if (infowindow.getMap()) {
+                    infowindow.close();
+                } else {
+                    infowindow.open(map, marker);
+                    map.setCenter(infowindow.position)
+                }
+            }
+
+            function bookmark(title, address, action) {
+                $.ajax({
+                    type: "POST",
+                    url: "/like_matjip",
+                    data: {
+                        title_give: title,
+                        address_give: address,
+                        action_give: action
+                    },
+                    success: function (response) {
+                        if (response["result"] == "success") {
+                            get_matjips()
                         }
                     }
                 })
             }
+        </script>
 
-    </script>
-<body>
-    <div class='wrap'>
+    </head>
 
-        <div class="top_box">
-            <div class="line">
-                <h1 >나홀로 링크 메모장!</h1>
-                <p>중요한 링크를 저장해두고, 나중에 볼 수 있는 공간입니다.</p>
-                <hr>
-            </div>
-            <button id="posting_bt" class="button_style01" onclick="posting_box()">포스팅박스 열기</button>
-        </div>
-
-        <div id="posting_box" class="middle_box">
-            <div class="middle_text">
-                <p>아티클 URL</p>
-                <input class="middle_input01" id="article_input">
-                <p>
-                <p>간단 코멘트</p>
-                <textarea class="middle_input02" id="comment_input"></textarea>
-                <p>
-                <button class="button_style01 text_size10pt" onclick="posting()">기사저장</button>
-            </div>
-        </div>
-
-        <div class="box_card" id="card_box">
-            <div class="card">
-                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbSjDIW%2Fbtrd04bLHuk%2Fjh9soU7pUEQrLA9eK5wG11%2Fimg.jpg"/>
-                <div class="card-text">
-                    <a href="https://www.naver.com/">여기에 기사 제목</a>
-                    <p>기사의 요약 내용이 들어갑니다. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세 무궁화 삼천리 화려강산...</p>
-                    <p class="text_color">코멘트 입력</p>
+    <body>
+        <div class="wrap">
+            <div class="banner">
+                <div class="d-flex flex-column align-items-center"
+                     style="background-color: rgba(0,0,0,0.5);width: 100%;height: 100%;">
+                    <h1 class="title mt-5 mb-2">스파르타 맛집 지도</h1>
+                    <button type="button" onclick="get_matjips()" class="btn btn-sparta">
+                        새로고침하고 더 많은 맛집 보기
+                    </button>
                 </div>
             </div>
+            <div id="map"></div>
+
+            <div class="matjip-list" id="matjip-box">
+            </div>
         </div>
 
-    </div>
+    </body>
 
-</body>
 </html>
-
