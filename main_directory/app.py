@@ -23,6 +23,10 @@ def indexnew():
 def introduce():
    return render_template('introduce_member.html')
 
+@app.route('/highwaylist.html')
+def highwaylist():
+   return render_template('highwaylist.html')
+
 ## API 역할을 하는 부분
 @app.route('/boardnew', methods=['POST'])
 def writerecommend():
@@ -53,6 +57,11 @@ def showrecommend():
 def show_stars():
     movie_star = list(db.lats1.find({}, {'_id': False}).sort("like", -1).limit(3))
     return jsonify({'movie_stars': movie_star})
+
+@app.route('/api/lists', methods=['GET'])
+def show_starss():
+    movie_star = list(db.lats1.find({}, {'_id': False}).sort("like", -1))
+    return jsonify({'movie_starss': movie_star})
 
 
 @app.route('/api/like', methods=['POST'])
