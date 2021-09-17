@@ -1,24 +1,24 @@
-        function LoadingWithMask() {
+!!참고!! body속 id=map 위에 올려주세요!
+
+<div id="bgblack" style="height: 750px;width: 1000px;margin: auto 11.7%;background-color: black;display:none;position: absolute; z-index:300;opacity: 0.3"></div>
+
+그리고 map과 </section> 사이에 안닫힌 div를 발견했습니다..
+맵 바로 아래에 </div> 하시고 </section>에 빨간 줄 사라지나 확인해보세요 :)
+
+
+!!참고!!  function 교체
+
+function LoadingWithMask() {
             //화면에 출력할 마스크를 설정해줍니다.
-            var mask = "<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
             var loadingImg = '';
 
             loadingImg += "<div id='loadingImg'>";
-            loadingImg += "<img src='https://blog.kakaocdn.net/dn/dspe9B/btrfiG6XzXj/ZyevKlNxVdqFVVUgSSO6k0/img.gif' style='position: absolute; display: inline-block; margin: 25% 40%'/>";
+            loadingImg += "<img src='https://blog.kakaocdn.net/dn/dspe9B/btrfiG6XzXj/ZyevKlNxVdqFVVUgSSO6k0/img.gif' style='position: absolute; display:block; margin: 25% 40%'/>";
             loadingImg += "</div>";
             //화면에 레이어 추가
-            $('body').append(mask)
-
-            //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
-            $('#mask').css({
-                'margin':'25px 0px 0px 0px',
-                'width': '60%',
-                'height': '800px',
-                'opacity': '0.3'
-            });
 
             //마스크 표시
-            $('#mask').show();
+            $('#bgblack').show();
 
             //로딩중 이미지 표시
             $('.loadingImg').append(loadingImg);
@@ -26,6 +26,6 @@
         }
 
         function closeLoadingWithMask() {
-            $('#mask, #loadingImg').hide();
-            $('#mask, #loadingImg').empty();
+            $('#bgblack, #loadingImg').hide();
+            $('#bgblack, #loadingImg').empty();
         }
