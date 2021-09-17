@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>휴게소를 먹다</title>
+
+    <script type="text/javascript"
+            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xlkaszxuya"></script>
+
+    <script language="javascript"> function showPopup() {
+        window.open("info_popup.html", "a", "width=800px, height=900px, left=100, top=50");
+    } </script>
+
+    <style>
+        nav {
+            width: 100%;
+            margin: auto;
+            background: #fff;
+            padding: 0px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #aaa;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: 0 10px;
+        }
+
+        nav ul li a,
+        nav ul li a:after,
+        nav ul li a:before {
+            transition: all .5s;
+        }
+
+        nav ul li a:hover {
+            color: #555;
+        }
+
+
+        /* SHIFT */
+        nav.shift ul li a {
+            position: relative;
+            z-index: 1;
+        }
+
+        nav.shift ul li a:hover {
+            color: #ffffff;
+        }
+
+        nav.shift ul li a:after {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            width: 100%;
+            height: 1px;
+            content: '.';
+            color: transparent;
+            background: #ED1C24;
+            visibility: none;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        nav.shift ul li a:hover:after {
+            opacity: 1;
+            visibility: visible;
+            height: 100%;
+        }
+
+
+        input[type=text] {
+            padding: 1px 1px;
+            margin: auto;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .footer-dark {
+            padding: 50px 0;
+            color: black;
+            background-color: lightgray;
+        }
+
+        .footer-dark h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .footer-dark ul {
+            padding: 0;
+            list-style: none;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .footer-dark ul a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.6;
+        }
+
+        .footer-dark ul a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 767px) {
+            .footer-dark .item:not(.social) {
+                text-align: center;
+                padding-bottom: 20px;
+            }
+        }
+
+        .footer-dark .item.text {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 767px) {
+            .footer-dark .item.text {
+                margin-bottom: 0;
+            }
+        }
+
+        .footer-dark .item.text p {
+            opacity: 0.6;
+            margin-bottom: 0;
+        }
+
+        .footer-dark .item.social > a:hover {
+            opacity: 0.9;
+        }
+
+        .footer-dark .copyright {
+            text-align: center;
+            padding-top: 10px;
+            opacity: 0.3;
+            font-size: 13px;
+            margin-bottom: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+        }
+
+        section {
+            padding: 0px 0;
+        }
+
+        a, a:hover, a:focus, a:active {
+            text-decoration: none;
+            outline: none;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .site-heading h2 {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .site-heading h2 span {
+            color: #ff5a6e;
+        }
+
+        .site-heading h4 {
+            display: inline-block;
+            padding-bottom: 20px;
+            position: relative;
+            text-transform: capitalize;
+            z-index: 1;
+        }
+
+        .site-heading h4::before {
+            background: #ff5a6e none repeat scroll 0 0;
+            bottom: 0;
+            content: "";
+            height: 2px;
+            left: 50%;
+            margin-left: -25px;
+            position: absolute;
+            width: 50px;
+        }
+
+        .site-heading h2 span {
+            color: #ff5a6e;
+        }
+
+        .site-heading {
+            margin-bottom: 60px;
+            overflow: hidden;
+            margin-top: -5px;
+        }
+
+        .team-area .single-item {
+            margin-bottom: 30px;
+        }
+
+        .team-area .item .thumb {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .team-area .item .thumb::after {
+            background: #232323 none repeat scroll 0 0;
+            content: "";
+            height: 100%;
+            left: 0;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            transition: all 0.35s ease-in-out;
+            -webkit-transition: all 0.35s ease-in-out;
+            -moz-transition: all 0.35s ease-in-out;
+            -ms-transition: all 0.35s ease-in-out;
+            -o-transition: all 0.35s ease-in-out;
+            width: 100%;
+        }
+
+        .team-area .team-items .item:hover .thumb::after {
+            opacity: 0.7;
+        }
+
+        .team-area .item .thumb .overlay {
+            top: -100%;
+            left: 0;
+            padding: 20px;
+            position: absolute;
+            text-align: center;
+            -webkit-transition: all 0.35s ease-in-out;
+            -moz-transition: all 0.35s ease-in-out;
+            -ms-transition: all 0.35s ease-in-out;
+            -o-transition: all 0.35s ease-in-out;
+            transition: all 0.35s ease-in-out;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .team-area .item:hover .thumb .overlay {
+            top: 50%;
+            transform: translate(-50%, -50%);
+            left: 50%;
+        }
+
+        .team-area .item .thumb .overlay p {
+            color: #ffffff;
+        }
+
+        .team-area .item .thumb .overlay h4 {
+            color: #ffffff;
+            display: inline-block;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .team-area .item .thumb img {
+            -webkit-transition: all 0.35s ease-in-out;
+            -moz-transition: all 0.35s ease-in-out;
+            -ms-transition: all 0.35s ease-in-out;
+            -o-transition: all 0.35s ease-in-out;
+            transition: all 0.35s ease-in-out;
+        }
+
+        .team-area .item:hover .thumb img {
+            opacity: .6;
+        }
+
+        .team-area .item .thumb .social li {
+            display: inline-block;
+        }
+
+        .team-area .item .thumb .social li a {
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            color: #ffffff;
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+            margin: 0 2px;
+            text-align: center;
+            width: 40px;
+        }
+
+        .team-area .info {
+            background: #ffffff none repeat scroll 0 0;
+            -moz-box-shadow: 0 0 10px #cccccc;
+            -webkit-box-shadow: 0 0 10px #cccccc;
+            -o-box-shadow: 0 0 10px #cccccc;
+            box-shadow: 0 0 10px #cccccc;
+            padding: 20px 20px 20px;
+            position: relative;
+            text-align: center;
+            z-index: 9;
+        }
+
+        .team-area .info .message {
+            height: 50px;
+            line-height: 40px;
+            margin-left: -25px;
+            margin-top: -25px;
+            position: absolute;
+            text-align: center;
+            top: 0;
+            width: 50px;
+        }
+
+        .team-area .info .message a {
+            background: #fff none repeat scroll 0 0;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            -moz-box-shadow: 0 0 10px #cccccc;
+            -webkit-box-shadow: 0 0 10px #cccccc;
+            -o-box-shadow: 0 0 10px #cccccc;
+            box-shadow: 0 0 10px #cccccc;
+            box-sizing: border-box;
+            color: #ff5a6e;
+            display: inline-block;
+            font-size: 20px;
+            height: 50px;
+            line-height: 50px;
+            width: 50px;
+        }
+
+        .team-area .info .message a i {
+            font-weight: 500;
+        }
+
+        .team-area .info h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+            text-transform: capitalize;
+        }
+
+        .team-area .info span {
+            color: #ff5a6e;
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+<section style="position: fixed; width: 1442px; margin: auto; top: 0;left: 0;right: 0; z-index: 999999">
+    <nav class="shift">
+        <div style="float: left; margin-top: 15px; margin-left: 50px; margin-right: 10px"><a href="indexnew.html">
+            <img src="/static/logo.png" width="104" alt="휴먹">
+        </a></div>
+        <ul style="padding-top: 15px">
+            <li><a href="indexnew.html">Home</a></li>
+            <li><a href="boardnew.html">먹거리 제안하기</a></li>
+            <li><a href="#">팀 소개</a></li>
+        </ul>
+        <hr style="width:100%;text-align:left;margin-left:0; margin-bottom: 0">
+    </nav>
+</section>
+<section id="team" class="team-area" style="margin-top: 150px;margin-bottom: 20px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="site-heading text-center">
+                    <h2>열정 가득 <span>달밤코딩 멤버들</span></h2>
+                    <h4>우리 멤버들을 만나보세요</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row team-items">
+            <div class="col-md-4 single-item">
+                <div class="item">
+                    <div class="thumb">
+                        <img class="img-fluid" src="/static/kim.png" alt="Thumb">
+                        <div class="overlay">
+                            <h4>김성훈</h4>
+                            <p>
+                                말이 많음(aka. TMT)
+                            </p>
+                            <p style="font-weight: bold; color: #ED1C24;">
+                                #ESFJ #게임하기 #웹툰 #운동
+                            </p>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <h4>김성훈</h4>
+                        <span>달밤코딩조 팀장 / Back-end 개발자</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 single-item">
+                <div class="item">
+                    <div class="thumb">
+                        <img class="img-fluid" src="/static/min.png" alt="Thumb">
+                        <div class="overlay">
+                            <h4>김민</h4>
+                            <p>
+                                전자기기를 좋아하는 전자기기 마니아다
+                            </p>
+                            <p style="font-weight: bold; color: #ED1C24;">
+                                #ENFP #물복보단 딱복 #전자기기 진짜 좋아함
+                            </p>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <h4>김민</h4>
+                        <span>Front-End 개발자</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 single-item">
+                <div class="item">
+                    <div class="thumb">
+                        <img class="img-fluid" src="/static/introduce1.png" alt="Thumb">
+                        <div class="overlay">
+                            <h4>문경덕</h4>
+                            <p>
+                                엄청난 민초단이며 민초가 들어간 모든 음식은 <br>다 좋다
+                            </p>
+                            <p style="font-weight: bold; color: #ED1C24;">
+                                #ISTJ #축구 #새벽 4시에 이거 만드는중
+                            </p>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <h4>문경덕</h4>
+                        <span>Front-end 개발자</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row team-items">
+            <div class="col-md-4 single-item">
+                <div class="item">
+                    <div class="thumb">
+                        <img class="img-fluid" src="/static/choi.png" alt="Thumb">
+                        <div class="overlay">
+                            <h4>최은빈</h4>
+                            <p>
+                                숨쉬는거 배고 다 귀찮아함
+                            </p>
+                            <p style="font-weight: bold; color: #ED1C24;">
+                                #ISTP #게임 #딱복보단 물복
+                            </p>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <h4>최은빈</h4>
+                        <span>Back-end 개발자</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 single-item">
+                <div class="item">
+                    <div class="thumb">
+                        <img class="img-fluid" src="/static/wang.png" alt="Thumb">
+                        <div class="overlay">
+                            <h4>왕예리</h4>
+                            <p>
+                                주 3회 운동하기, 탄산음료 마시지 않기가 <br>9월 목표!
+                            </p>
+                            <p style="font-weight: bold; color: #ED1C24;">
+                                #ENFP #영화보기 #예쁜하늘보기<br> #진짜탄산마시지않는중 #진짜임
+                            </p>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <h4>왕예리</h4>
+                        <span>(1004)매니저 / 스파르타 활력소</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 single-item">
+                <div class="item">
+                    <div class="thumb">
+                        <img class="img-fluid" src="/static/yang.png" alt="Thumb">
+                        <div class="overlay">
+                            <h4>양봉현</h4>
+                            <p>
+                                개발의 시작은 러닝이다! <런발자>
+                            </p>
+                            <p style="font-weight: bold; color: #ED1C24;">
+                                #ISFJ #고양이쓰다듬기 #매일저녁러닝중
+                            </p>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <h4>양봉현</h4>
+                        <span>튜터 / 스파르타 브레인</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="footer-dark">
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>Service</h3>
+                    <ul>
+                        <li><a href="indexnew.html">홈</a></li>
+                        <li><a href="boardnew.html">먹거리 제안하기</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">팀 소개</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 item text">
+                    <h3>달밤코딩조</h3>
+                    <p>2021년 9월 3일 5명의 열정적인 내일배움단 팀원들이 모여 만든 조이다. 전국 모든 휴게소에 대한 데이터를 축적하는 것을 목표로 하고 있으며 매일 밤 목표를 위해 열코를
+                        진행중인 팀이다.</p>
+                </div>
+                <p class="copyright">달밤코딩조 © 2021</p>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+<footer>
+
+</footer>
