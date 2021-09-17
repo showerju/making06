@@ -1,90 +1,114 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html>
 <head>
+    <title>휴게소를 먹다</title>
+
     <!-- Required meta tags -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
 
-    <title>휴게소를 먹다</title>
     <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xlkaszxuya"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <meta charset="EUC-KR">
 
 
-    <script language="javascript">
-        // // $(document).ready(function () {
-        // //     showPopup();
-        // // });
-        //
-        // function showPopup()
-        // {
-        //     $.ajax({
-        //         type: 'GET',
-        //         url: '/api/list',
-        //         data: {},
-        //         success: function (response) {
-        //             let popstars = response['pop_star']
-        //             // console.log(popstars)
-        //             for (let i = 0; i < popstars.length; i++) {
-        //                 let id = popstars[i]['id']
-        //                 let menu = popstars[i]['menu']
-        //                 let price = popstars[i]['price']
-        //                 let menu_info = popstars[i]['menu_info']
-        //                 let name = popstars[i]['name']
-        //                 let number = popstars[i]['number']
-        //                 let address = popstars[i]['address']
-        //                 let score = popstars[i]['score']
-        //                 let url = popstars[i]['url']
-        //                 let menu_image = popstars[i]['menu_image']
-        //                 console.log(id, menu, price, menu_info, name, number, address, score, url, menu_image)
-        //         let temp_html=`<div class="card">
-        //                                         <img class="card_image" src="${menu_image}" alt="이미지없음"/>
-        //                                         <div class="card_text">
-        //                                             <p style="font-size: 25px; font-weight: bold;">${menu}&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">${price}원</span></p>
-        //                                             <hr class="hr_style">
-        //                                             <p>${menu_info}</p>
-        //                                             <hr class="hr_style">
-        //                                             <div style="line-height: 28px">
-        //                                                 <p style="font-weight: bold">휴게소: <span style="font-weight: normal">&nbsp&nbsp${name}</span></p>
-        //                                                 <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소:<span style="font-weight: normal">&nbsp&nbsp${address}</span></p>
-        //                                                 <p style="font-weight: bold">연락처:<span style="font-weight: normal">&nbsp&nbsp${number}</span></P>
-        //                                                 <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점:<span style="font-weight: normal">&nbsp&nbsp${score}</span></p>
-        //                                             </div>
-        //                                             <hr class="hr_style">
-        //                                             <span style="font-weight: bold">더 알고 싶다면?</span><a href="${url}"> 상세보기</a>
-        //                                         </div>
-        //                                     </div>`
-        //                     $('#card_box').append(temp_html)
-        //                 }
-        //             }
-        //         });
-        //    }
+    <script>
+        $(document).ready(function () {
+            showhighway();
+            make_list()
+        });
 
+        function showhighway() {
+            $.ajax({
+                type: 'GET',
+                url: '/api/list',
+                data: {},
+                success: function (response) {
+                    let myhighway = response['movie_stars']
+                    for (let i = 0; i < myhighway.length; i++) {
+                        let image = myhighway[i]['image']
+                        let url = myhighway[i]['url']
+                        let name = myhighway[i]['name']
+                        let like = myhighway[i]['like']
+
+                        let temp_html = `<ul class="list-card" style="padding-left: 0px;float: left;">
+                                            <li>
+                                                <div>
+                                                    <img src="${image}" alt="alternatetext" class="img">
+                                                </div>
+                                                <div class="txt-area" style="font-size: 19px">${name}</div>
+                                                <div class="btn-area">
+                                                    <button onclick="location.href='${url}';" target="_blank" type="button" class="btn btn-danger" style="width: 150px;float: left;margin-right: 10px">휴게소
+                                                        탐방하기
+                                                    </button>
+                                                    <button onclick="likeHighway('${name}')" type="button" class="btn btn-primary" style="width:96px">👍🏻 ${like}</button>
+                                                </div>
+                                            </li>
+                                        </ul>`
+
+                        $('#recommend-box').append(temp_html)
+                    }
+                }
+            });
+        }
+
+        function showlike() {
+            $.ajax({
+                type: 'GET',
+                url: '/api/list',
+                data: {},
+                success: function (response) {
+                    let myhighway = response['movie_stars']
+                    for (let i = 0; i < myhighway.length; i++) {
+                        let name = myhighway[i]['name']
+                        let like = myhighway[i]['like']
+
+                        let temp_html = `<button onclick="likeHighway('${name}')" type="button" class="btn btn-primary" style="width:96px">👍🏻 ${like}</button>`
+
+                        $('#recommend-box2').append(temp_html)
+                    }
+                }
+            });
+        }
+
+        function likeHighway(name) {
+            $.ajax({
+                type: 'POST',
+                url: '/api/like',
+                data: {name_give: name},
+                success: function (response) {
+                    alert(response['msg']);
+                    window.location.reload()
+                }
+            });
+        }
+
+        function deleteStar(name) {
+            $.ajax({
+                type: 'POST',
+                url: '/api/delete',
+                data: {sample_give: '샘플데이터'},
+                success: function (response) {
+                    alert(response['msg']);
+                }
+            });
+        }
 
     </script>
 
     <style>
         .wrap{
-            width: 300px;
+
         }
         nav {
             width: 100%;
@@ -382,11 +406,6 @@
 </head>
 
 <body>
-<div class='wrap'>
-        <div class="box_card" id="card_box">
-
-        </div>
-</div>
 <section style="position: fixed; width: 1442px; margin: auto; top: 0;left: 0;right: 0; z-index: 999">
     <nav class="shift">
         <div style="float: left; margin-top: 15px; margin-left: 50px; margin-right: 10px"><a href="indexnew.html">
@@ -418,128 +437,42 @@
 
 
 <section class="recommend">
-    <h1>
-        가장 많이 찾는 휴게소 Top 3 >
+    <h1 style="float: left;">
+        가장 많이 찾는 휴게소 Top 4
     </h1>
-    <div class="box">
-        <ul class="list-card" style="padding-left: 0px;float: left;">
-            <li>
-                <div>
-                    <img src="https://me2.kr/utu91" alt="alternatetext" class="img">
-                </div>
-                <div class="txt-area">서울 만남의광장 휴게소</div>
-                <div class="btn-area">
-                    <button type="button" class="btn btn-danger" style="width: 150px;float: left;margin-right: 10px">맛집
-                        탐방하기
-                    </button>
-                    <button type="button" class="btn btn-primary" style="width:96px">👍🏻 1</button>
-                </div>
-            </li>
-        </ul>
-        <ul class="list-card" style="padding-left: 0px;float: left;">
-            <li>
-                <div>
-                    <img src="https://me2.kr/utu91" alt="alternatetext" class="img">
-                </div>
-                <div class="txt-area">서울 만남의광장 휴게소</div>
-                <div class="btn-area">
-                    <button type="button" class="btn btn-danger" style="width: 150px;float: left;margin-right: 10px">맛집
-                        탐방하기
-                    </button>
-                    <button type="button" class="btn btn-primary" style="width:96px">👍🏻 1</button>
-                </div>
-            </li>
-        </ul>
-        <ul class="list-card" style="padding-left: 0px;float: left;">
-            <li>
-                <div>
-                    <img src="https://me2.kr/utu91" alt="alternatetext" class="img">
-                </div>
-                <div class="txt-area">서울 만남의광장 휴게소</div>
-                <div class="btn-area">
-                    <button type="button" class="btn btn-danger" style="width: 150px;float: left;margin-right: 10px">맛집
-                        탐방하기
-                    </button>
-                    <button type="button" class="btn btn-primary" style="width:96px" id="scroll">👍🏻 1</button>
-                </div>
-            </li>
-        </ul>
+    <p style="padding-left: 1100px;">
+        <a href="highwaylist.html">휴게소 추천하기></a>
+    </p>
+    <div class="box" id="recommend-box">
     </div>
 </section>
 
-<section class="mapstart">
+<section class="mapstart" id="scroll">
     <div class="divider"
          style="font-weight: bold; font-size: 30px; margin-bottom: 5px; padding-top: 21px; color: white">
         <p>여행의 시작과 끝만 알려주세요 <br>맛집은 휴먹이 찾을게요 </p>
 
     </div>
-
-    <form>
-        <label for="fname" style="font-weight: bold">출발지</label>
-        <input type="text" id="fname" name="fname" style="margin-right: 25px">
-        <label for="lname" style="font-weight: bold">목적지</label>
-        <input type="text" id="lname" name="lname" style="margin-right: 25px">
-        <button type="button" class="btn btn-dark" style="padding: 6px 20px; margin-bottom: 4px">맛집 검색</button>
-    </form>
-
-    <div id="map" style="width:1000px;height:750px;margin: auto; margin-bottom: 50px"></div>
-</section>
-
-<section style="">
-    <div class="container">
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">팝업창 열기</button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body" id="mymodals">
-                        <div>
-                            <div>
-                                <div>
-                                    <img src="https://me2.kr/z8lz7" alt="이미지없음"
-                                         style="width: 466px;text-align: center; border-radius: 10px"/>
-                                    <div>
-                                        <p style="font-size: 25px; font-weight: bold; margin-top: 20px;margin-bottom: 5px">
-                                            순두부청국장&nbsp&nbsp<span
-                                                style="font-size: 15px; font-weight: normal">7,000원</span></p>
-                                        <hr class="hr_style">
-                                        <p>직접 만든 순두부로 맛과 영양을 잡았다! 옥산 순두부 청국장 냄새도 심하지 않고 간도 세지 않아 먹기 좋다 심지어 속도 편해 안 먹을 수가
-                                            없다!</p>
-                                        <hr class="hr_style">
-                                        <div style="line-height: 28px">
-                                            <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp옥산휴게소 (부산방향)</span>
-                                            </p>
-                                            <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span
-                                                    style="font-weight: normal"> &nbsp&nbsp충북 청주시 흥덕구 옥산면 경부고속도로 309</span>
-                                            </p>
-                                            <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp063-260-1053</span>
-                                            </P>
-                                            <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span
-                                                    style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>
-                                        </div>
-                                        <hr class="hr_style">
-                                        <span style="font-weight: bold">더 알고 싶다면?</span><a
-                                            href="https://goo.gl/maps/Go1XjzaqC96Dqx1Z7"> 상세보기</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">👍🏻 1</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
+    <div id="floating-panel" style="margin-top: 20px;font-size: 20px; margin-bottom: 20px;">
+        <b><span>고속도로를 선택해 주세요: </b>
+        <select id="mode" onchange="select_highway()">
+            <option value="0">고속도로를 선택해 주세요.</option>
+            <option value="1">경부고속도로</option>
+            <option value="2">남해고속도로</option>
+            <option value="3">당진영덕고속도로</option>
+            <option value="4">순천완주고속도로</option>
+            <option value="5">영동고속도로</option>
+            <option value="6">익산장수고속도로</option>
+            <option value="7">중부고속도로</option>
+            <option value="8">중부내륙고속도로</option>
+            <option value="9">중앙고속도로</option>
+            <option value="10">통영대전고속도로</option>
+            <option value="11">평택제천고속도로</option>
+            <option value="12">호남고속도로</option>
+        </select>
     </div>
+
+    <div class="loadingImg" id="map" style="width:1000px;height:750px;margin: auto; margin-bottom: 50px"></div>
 </section>
 
 
@@ -569,227 +502,731 @@
             </div>
     </footer>
 </div>
-</body>
-<footer>
-
-    <script>
-
-//        $(document).ready(function () {
-//            showStar();
-//        });
-//
-//        function showStar() {
-//            $.ajax({
-//                type: 'GET',
-//                url: '/api/list',
-//                data: {},
-//                success: function (response) {
-//                    let popstars = response['pop_star']
-//
-//                    for (let i = 0; i < popstars.length; i++) {
-//                        let id = popstars[i]['id']
-//                        let menu = popstars[i]['menu']
-//                        let price = popstars[i]['price']
-//                        let menu_info = popstars[i]['menu_info']
-//                        let name = popstars[i]['name']
-//                        let number = popstars[i]['number']
-//                        let address = popstars[i]['address']
-//                        let score = popstars[i]['score']
-//                        let url = popstars[i]['url']
-//                        let menu_image = popstars[i]['menu_image']
-//                        console.log(id, menu, price, menu_info, name, number, address, score, url, menu_image)
-//                        let temp_html =`
-//                        `
-//                    }
-//                }
-//            });
-//        }
-
-
-        $(function () {
-
-            initMap();
-
-        });
-
-
-        function initMap() {
-
-
-            var areaArr = new Array();  // 지역을 담는 배열 ( 지역명/위도경도 )
-            areaArr.push(
-                /*지역구 이름*/			/*위도*/					/*경도*/
-                {location: '서울만남의광장휴게소(부산방향)', lat: '37.46025188399002', lng: '127.04196158084015'}, // 강남구 중심좌표
-                {location: '죽전휴게소(서울방향)', lat: '37.33238549545168', lng: '127.10481758612747'}, // 강동구 중심좌표
-                {location: '망향휴게소(부산방향)', lat: '36.85537668936837', lng: '127.18087158822793'}, // 강북구 중심좌표
-                {location: '옥산휴게소(부산방향)', lat: ' 36.65771392021131', lng: '127.36982000961997'},// 강서구 중심좌표
-                {location: '죽암휴게소(부산방향)', lat: '36.486780898348805', lng: '127.42926089180716'}, // 관악구 중심좌표
-                {location: '인삼랜드휴게소(하남방향)', lat: '36.15470488687423', lng: '127.49769187314587'}, // 광진구 중심좌표
-                {location: '이서휴게소(논산방향)', lat: '35.801952625742175', lng: '127.02576849590804'}, // 구로구 중심좌표
-                {location: '정읍녹두장군휴게소(논산방향)', lat: '35.59996750575727', lng: '126.8643325245416'}, // 금천구 중심좌표
-                {location: '보성녹차휴게소(순천방향)', lat: '34.80732155442688', lng: '127.18099379737176'}, // 노원구 중심좌표
-                {location: '횡성휴게소(강릉방향)', lat: '37.46275755519266', lng: '128.13396927867132'}, // 도봉구 중심좌표
-                {location: '천등산휴게소(평택방향)', lat: '37.07694893304106', lng: '127.98931943021573'}, // 동대문구 중심좌표
-                {location: '충주휴게소(양평방향)', lat: '37.02316775118798', lng: '127.83928679745476'}, // 동작구 중심좌표
-                {location: '괴산휴게소(양평방향)', lat: '36.83177713410066', lng: '127.96015439172078'}, // 마포구 중심좌표
-                {location: '군위휴게소(춘천방향)', lat: '36.265498301868476', lng: '128.57690233891032'}, // 서대문구 중심좌표
-                {location: '추풍령휴게소(서울방향)', lat: '36.19971559421238', lng: '128.00326067958855'}, // 서초구 중심좌표
-                {location: '영산휴게소(마산방향)', lat: '35.42978631538088', lng: '128.49589747336327'},  // 성동구 중심좌표
-                {location: '경주휴게소(부산방향)', lat: '35.724069216816254', lng: '129.19265470262897'}, // 성북구 중심좌표
-                {location: '진주휴게소(부산방향)', lat: '35.15973757516861', lng: '128.12198426703276'}, // 송파구 중심좌표
-                {location: '섬진강휴게소(부산방향)', lat: '34.984682931258625', lng: '127.77035093495383'},  // 양천구 중심좌표
-                {location: '기흥휴게소(부산방향)', lat: '37.23493644055473', lng: '127.1045459074627'}, // 영등포구 중심좌표
-                {location: '안성휴게소(부산방향)', lat: '37.013419735215436', lng: '127.14480747972593'},  // 용산구 중심좌표
-                {location: '여주휴게소(인천방향)', lat: '37.23974756508235', lng: '127.56995384444281'}, // 은평구 중심좌표
-                {location: '문경휴게소(창원방향)', lat: '36.62035936806056', lng: '128.1499245454857'}, // 종로구 중심좌표
-                {location: '속리산휴게소(청주방향)', lat: '36.44769458136483', lng: '127.86905587549954'}, // 중구 중심좌표
-                {location: '오창휴게소(통영방향)', lat: '36.758462471409324', lng: '127.48179634390809'}, // 중랑구 중심좌표
-                {location: '천안삼거리휴게소(서울방향)', lat: '36.78781395147762', lng: '127.1734366903498'}, // 중구 중심좌표
-                {location: '황간휴게소(부산방향)', lat: '36.24887451676956', lng: '127.85264887475222'}, // 중구 중심좌표
-                {location: '진안마이산휴게소 (익산방향)', lat: '35.777883600651634', lng: '127.42528370577209'},  // 중구 중심좌표
-                {location: '황전휴게소 (전주방향)', lat: '35.153237852851746', lng: '127.45448542868527'},
-                {location: '백양사휴게소 (천안방향)', lat: '35.39296566485018', lng: '126.80739638658395'},
-                {location: '칠곡휴게소(서울방향)', lat: '36.01179120077814', lng: '128.4308484668563'}, // 중구 중심좌표
-                {location: '성주휴게소(양평방향)', lat: '36.008584838611434', lng: '128.26111423587943'}, // 중구 중심좌표
-                {location: '안동휴게소(부산방향)', lat: '36.55317367335304', lng: ' 128.64190767726387'}, // 중구 중심좌표
-                {location: '진영휴게소(순천방향)', lat: '35.28007440717322', lng: '128.71601079471563'}, // 중구 중심좌표
-                {location: '산청휴게소(하남방향)', lat: '35.333498918746635', lng: '127.93899678012033'}, // 중구 중심좌표
-                {location: '통도사휴게소(부산방향)', lat: '35.4888534980784', lng: '129.09075599798786'} // 중구 중심좌표
-
-            );
-
-
-            let markers = new Array(); // 마커 정보를 담는 배열
-            let infoWindows = new Array(); // 정보창을 담는 배열
-
-            var map = new naver.maps.Map('map', {
-                center: new naver.maps.LatLng(36.138626808096, 127.88858512205674),
-                zoom: 8
-            });
-
-
-            for (var i = 0; i < areaArr.length; i++) {
-                // 지역을 담은 배열의 길이만큼 for문으로 마커와 정보창을 채워주자 !
-
-                var marker = new naver.maps.Marker({
-                    map: map,
-                    title: areaArr[i].location, // 지역구 이름
-                    position: new naver.maps.LatLng(areaArr[i].lat, areaArr[i].lng) // 지역구의 위도 경도 넣기
-                });
-
-
-                /* 정보창 */
-                var infoWindow = new naver.maps.InfoWindow({
-                    content:'<div class=\'wrap\'>\n' +
-                        '        <div class="box_card" id="card_box">\n' +
-                        '            <div class="card">\n' +
-                        '                <img class="card_image" src="https://me2.kr/z8lz7" alt="이미지없음"/>\n' +
-                        '                <div class="card_text">\n' +
-                        '                    <p style="font-size: 23px; font-weight: bold;">순두부청국장&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">7,000원</span></p>\n' +
-                        '                    <hr class="hr_style">\n' +
-                        '                    <p style="font-size: 15px;">직접 만든 순두부로 맛과 영양을 잡았다! 옥산 순두부 청국장 냄새도 심하지 않고 간도 세지 않아 먹기 좋다 심지어 속도 편해 안 먹을 수가 없다!</p>\n' +
-                        '                    <hr class="hr_style">\n' +
-                        '                    <div style="line-height: 24px">\n' +
-                        '                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp옥산휴게소 (부산방향)</span></p>\n' +
-                        '                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp충북 청주시 흥덕구 옥산면 경부고속도로 309</span></p>\n' +
-                        '                        <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp063-260-1053</span></P>\n' +
-                        '                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp3.7 ★★★★☆</span></p>\n' +
-                        '                    </div>\n' +
-                        '                    <hr class="hr_style">\n' +
-                        '                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="https://goo.gl/maps/Go1XjzaqC96Dqx1Z7"> 상세보기</a>\n' +
-                        '                </div>\n' +
-                        '            </div>\n' +
-                        '        </div>\n' +
-                        '</div>'
-                });
-
-            //     $(document).ready(function () {
-            //     showStar();
-            // });
-
-            function showStar() {
-                 $('#card_box').empty()
-                $.ajax({
-                    type: 'GET',
-                    url: '/api/list',
-                    data: {},
-                    success: function (response) {
-                        let popstars = response['pop_star']
-                        console.log(popstars)
-                        for(let i = 0; i < popstars.length; i ++) {
-                            let menu = popstars[i]['menu']
-                            let price = popstars[i]['price']
-                            let menu_info = popstars[i]['menu_info']
-                            let name = popstars[i]['name']
-                            let number = popstars[i]['number']
-                            let address = popstars[i]['address']
-                            let score = popstars[i]['score']
-                            let url = popstars[i]['url']
-                            let menu_image =popstars[i]['menu_image']
-                            console.log(menu,price,menu_info,name,number,address,score,url,menu_image)
-
-                            let temp_html=`<div class="card">
-                                                <img class="card_image" src="${menu_image}" alt="이미지없음"/>
-                                                <div class="card_text">
-                                                    <p style="font-size: 25px; font-weight: bold;">${menu}&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">${price}원</span></p>
-                                                    <hr class="hr_style">
-                                                    <p>${menu_info}</p>
-                                                    <hr class="hr_style">
-                                                    <div style="line-height: 28px">
-                                                        <p style="font-weight: bold">휴게소: <span style="font-weight: normal">&nbsp&nbsp${name}</span></p>
-                                                        <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소:<span style="font-weight: normal">&nbsp&nbsp${address}</span></p>
-                                                        <p style="font-weight: bold">연락처:<span style="font-weight: normal">&nbsp&nbsp${number}</span></P>
-                                                        <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점:<span style="font-weight: normal">&nbsp&nbsp${score}</span></p>
-                                                    </div>
-                                                    <hr class="hr_style">
-                                                    <span style="font-weight: bold">더 알고 싶다면?</span><a href="${url}"> 상세보기</a>
-                                                </div>
-                                            </div>`
-                            $('#card_box').append(temp_html)
-                        }
+<script>
+   function make_list() {
+            markers = [];
+            infos = [];
+            $.ajax({
+                type: "GET",
+                url: "/main_info",
+                data: {},
+                success: function (response) {
+                    let parking = response['parking_all'];
+                    for (let i = 0; i < parking.length; i++) {
+                        let coordinate = parking[i];
+                        let marker = make_marker(coordinate);
+                        add_info(i, marker, coordinate)
+                        console.log(marker);
                     }
-                });
-           }
+                }
+            })
+        };
 
+        function make_marker(coordinate) {
+            let marker = new naver.maps.Marker({
+                position: new naver.maps.LatLng(coordinate["lat"], coordinate["lng"]),
+                map: map,
+            });
+            markers.push(marker);
+            return marker
+        }
 
-//             '<div class="iw_inner">',
-//       <h3>서울만남의관장휴게소(부산)</h3>',
-// //       <p><br>',
-//          <img src="" width="" height="" alt="" class="" /><br>',
-// //            <br>',
-// //     '      <a <input type="button" value="팝업창 호출" onclick="showPopup();"/>휴게소더알아보기</a>',
-// //       </p>',
-// //    </div>'
-// // ].join('');
-
-
-                // 클릭했을 때 띄워줄 정보 HTML 작성
-
-
-                markers.push(marker); // 생성한 마커를 배열에 담는다.
-                infoWindows.push(infoWindow); // 생성한 정보창을 배열에 담는다.
-            }
-
-
-            function getClickHandler(seq) {
-
-                return function (e) {  // 마커를 클릭하는 부분
-                    var marker = markers[seq], // 클릭한 마커의 시퀀스로 찾는다.
-                        infoWindow = infoWindows[seq]; // 클릭한 마커의 시퀀스로 찾는다
-
+        function add_info(i, marker, coordinate) {
+            let html_temp = `
+                                <div class=\'wrap\'>
+                                    <div class="box_card" id="card-${i}">
+                                        <div class="card">
+                                            <img class="card_image" src="${coordinate["menu_image"]}" alt="이미지없음"/>
+                                            <div class="card_text">
+                                                <p style="font-size: 20px; font-weight: bold;">${coordinate["menu"]}&nbsp&nbsp<span style="font-size: 15px; font-weight: normal">${coordinate["price"]}</span></p>
+                                                <hr class="hr_style">
+                                                <p style="font-size: 15px;">${coordinate["menu_info"]}</p>
+                                                <hr class="hr_style">
+                                                <div style="line-height: 15px" >
+                                                     <p style="font-weight: bold"> <span style="font-weight:bold"> &nbsp&nbsp${coordinate["rest"]}</span></p>
+                                                    <p style="font-weight: bold">휴게소: <span style="font-weight: normal"> &nbsp&nbsp${coordinate["name"]}</span></p>
+                                                    <p style="font-weight: bold">주&nbsp&nbsp&nbsp&nbsp소: <span style="font-weight: normal"> &nbsp&nbsp${coordinate["address"]}</span></p>
+                                                    <p style="font-weight: bold">연락처: <span style="font-weight: normal"> &nbsp&nbsp${coordinate["number"]}</span></P>
+                                                    <p style="font-weight: bold">별&nbsp&nbsp&nbsp&nbsp점: <span style="font-weight: normal"> &nbsp&nbsp${coordinate["score"]}</span></p>
+                                                </div>
+                                                <hr class="hr_style">
+                                               <span style="font-weight: bold">더 알고 싶다면?</span><a href="${coordinate["url"]}"> 상세보기</a>
+                                            </div>
+                                        </div>
+                                        <div style="font-size: 11px; color: #999999">
+                                                    <p></p>
+                                                    <p>마커를 한번 더 누르면 창이 닫힙니다.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+            let infoWindow = new naver.maps.InfoWindow({
+                content: '<div class="aa" style="width:400px;text-align:center;padding:10px;"><b>' + html_temp,
+            });
+            infos.push(infoWindow);
+            naver.maps.Event.addListener(marker, "click", function (e) {
+                    console.log("clicked", infoWindow.length);
                     if (infoWindow.getMap()) {
                         infoWindow.close();
                     } else {
                         infoWindow.open(map, marker); // 표출
                     }
-                }
-            }
-
-            for (var i = 0, ii = markers.length; i < ii; i++) {
-                console.log(markers[i], getClickHandler(i));
-                naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i)); // 클릭한 마커 핸들러
-            }
+            })
         }
 
-    </script>
-</footer>
+     function LoadingWithMask() {
+            //화면에 출력할 마스크를 설정해줍니다.
+            var mask = "<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
+            var loadingImg = '';
+
+            loadingImg += "<div id='loadingImg'>";
+            loadingImg += "<img src='https://blog.kakaocdn.net/dn/dspe9B/btrfiG6XzXj/ZyevKlNxVdqFVVUgSSO6k0/img.gif' style='position: absolute; display:block; margin: 25% 40%'/>";
+            loadingImg += "</div>";
+            //화면에 레이어 추가
+            $('body').append(mask)
+
+            //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
+            $('#mask').css({
+                'margin':'25px 0px 0px 0px',
+                'width': '60%',
+                'height': '800px',
+                'opacity': '0.3'
+            });
+
+            //마스크 표시
+            $('#mask').show();
+
+            //로딩중 이미지 표시
+            $('.loadingImg').append(loadingImg);
+            $('#loadingImg').show();
+        }
+
+        function closeLoadingWithMask() {
+            $('#mask, #loadingImg').hide();
+            $('#mask, #loadingImg').empty();
+        }
+
+
+
+
+    var map = new naver.maps.Map('map', {
+        center: new naver.maps.LatLng(36.40214844673628, 127.87610096493835),
+        zoom: 8,
+        zoomControl: true, //줌 컨트롤의 표시 여부
+        zoomControlOptions: { //줌 컨트롤의 옵션
+            position: naver.maps.Position.TOP_RIGHT
+        }
+    });
+
+    function select_highway() {
+        let target = document.getElementById("mode");
+        let target_op = target.options[target.selectedIndex].value
+
+        if (target_op == 0) {
+            fast00();
+        } else if (target_op == 1) {
+            fast01();
+            LoadingWithMask();
+            setTimeout("closeLoadingWithMask()", 2600);
+        } else if (target_op == 2) {
+            fast02()
+            LoadingWithMask();
+            setTimeout("closeLoadingWithMask()", 2600);
+        } else if (target_op == 3) {
+            fast03()
+            LoadingWithMask();
+            setTimeout("closeLoadingWithMask()", 2600);
+        } else if (target_op == 4) {
+            fast04()
+            LoadingWithMask();
+            setTimeout("closeLoadingWithMask()", 2600);
+        } else if (target_op == 5) {
+            fast05()
+            LoadingWithMask();
+            setTimeout("closeLoadingWithMask()", 2600);
+        } else if (target_op == 6) {
+            fast06()
+            LoadingWithMask();
+            setTimeout("closeLoadingWithMask()", 2600);
+        } else if (target_op == 7) {
+            fast07()
+            LoadingWithMask();
+            setTimeout("closeLoadingWithMask()", 2600);
+        } else if (target_op == 8) {
+            fast08()
+            LoadingWithMask();
+            setTimeout("closeLoadingWithMask()", 2600);
+        } else if (target_op == 9) {
+            fast09()
+            LoadingWithMask();
+            setTimeout("closeLoadingWithMask()", 2600);
+        } else if (target_op == 10) {
+            fast10()
+            LoadingWithMask();
+            setTimeout("closeLoadingWithMask()", 2600);
+        } else if (target_op == 11) {
+            fast11()
+            LoadingWithMask();
+            setTimeout("closeLoadingWithMask()", 2600);
+        } else if (target_op == 12) {
+            fast12()
+            LoadingWithMask();
+            setTimeout("closeLoadingWithMask()", 2600);
+        }
+    }
+
+
+    <!-- 길그리기 기본 -->
+    var polyline = new naver.maps.Polyline({
+        map: map,
+        clickable: true,
+        strokeWeight: 8,
+        strokeColor: '#1acca4',
+        path: [],
+    });
+
+
+    /* polyline의 path를 가져오는 방법 */
+    let path = polyline.getPath();
+    console.log(path)
+
+    function fast00() {
+        path.clear();
+    };
+
+    function fast01() {
+        $.ajax({
+            type: "GET",
+            url: "/main/01",
+            data: {},
+            success: function (response) {
+                /*본격적으로 시작히기 전 앞에 선언된 path 리스트 비우기*/
+                path.clear();
+                /* 롤 오버 옵션 적용 */
+                naver.maps.Event.addListener(polyline, 'mouseover', function () {
+                    polyline.setOptions({
+                        strokeColor: '#0800ff',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 0.5,
+                        strokeWeight: 12
+                    });
+                });
+
+                naver.maps.Event.addListener(polyline, 'mouseout', function () {
+                    polyline.setOptions({
+                        strokeColor: '#1acca4',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 1,
+                        strokeWeight: 8
+                    });
+                });
+
+                let latlng = response["latlng_all1"];
+                for (let i = 0; i < latlng.length; i++) {
+                    /* 좌표 최적화 */
+                    if (i % 4 != 0) {
+                        continue;
+                    } else {
+                        let lat = latlng[i]['lat']
+                        let lng = latlng[i]['lng']
+                        /* 좌표를 받아서 path에 push */
+                        path.push(new naver.maps.LatLng(lat, lng),)
+                    }
+                }
+            }
+        })
+    };
+
+    function fast02() {
+        $.ajax({
+            type: "GET",
+            url: "/main/02",
+            data: {},
+            success: function (response) {
+                /*본격적으로 시작히기 전 앞에 선언된 path 리스트 비우기*/
+                path.clear();
+                /* 롤 오버 옵션 적용 */
+                naver.maps.Event.addListener(polyline, 'mouseover', function () {
+                    polyline.setOptions({
+                        strokeColor: '#0800ff',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 0.5,
+                        strokeWeight: 12
+                    });
+                });
+
+                naver.maps.Event.addListener(polyline, 'mouseout', function () {
+                    polyline.setOptions({
+                        strokeColor: '#1acca4',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 1,
+                        strokeWeight: 8
+
+                    });
+                });
+
+                let latlng = response["latlng_all2"];
+                for (let i = 0; i < latlng.length; i++) {
+                    /* 좌표 최적화 */
+                    if (i % 4 != 0) {
+                        continue;
+                    } else {
+                        let lat = latlng[i]['lat']
+                        let lng = latlng[i]['lng']
+                        /* 좌표를 받아서 path에 push */
+                        path.push(new naver.maps.LatLng(lat, lng),)
+                    }
+                }
+            }
+        })
+    };
+
+    function fast03() {
+        $.ajax({
+            type: "GET",
+            url: "/main/03",
+            data: {},
+            success: function (response) {
+                /*본격적으로 시작히기 전 앞에 선언된 path 리스트 비우기*/
+                path.clear();
+                /* 롤 오버 옵션 적용 */
+                naver.maps.Event.addListener(polyline, 'mouseover', function () {
+                    polyline.setOptions({
+                        strokeColor: '#0800ff',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 0.5,
+                        strokeWeight: 12
+                    });
+                });
+
+                naver.maps.Event.addListener(polyline, 'mouseout', function () {
+                    polyline.setOptions({
+                        strokeColor: '#1acca4',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 1,
+                        strokeWeight: 8
+
+                    });
+                });
+
+                let latlng = response["latlng_all3"];
+                for (let i = 0; i < latlng.length; i++) {
+                    /* 좌표 최적화 */
+                    if (i % 4 != 0) {
+                        continue;
+                    } else {
+                        let lat = latlng[i]['lat']
+                        let lng = latlng[i]['lng']
+                        /* 좌표를 받아서 path에 push */
+                        path.push(new naver.maps.LatLng(lat, lng),)
+                    }
+                }
+            }
+        })
+    };
+
+    function fast04() {
+        $.ajax({
+            type: "GET",
+            url: "/main/04",
+            data: {},
+            success: function (response) {
+                /*본격적으로 시작히기 전 앞에 선언된 path 리스트 비우기*/
+                path.clear();
+                /* 롤 오버 옵션 적용 */
+                naver.maps.Event.addListener(polyline, 'mouseover', function () {
+                    polyline.setOptions({
+                        strokeColor: '#0800ff',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 0.5,
+                        strokeWeight: 12
+                    });
+                });
+
+                naver.maps.Event.addListener(polyline, 'mouseout', function () {
+                    polyline.setOptions({
+                        strokeColor: '#1acca4',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 1,
+                        strokeWeight: 8
+
+                    });
+                });
+
+                let latlng = response["latlng_all4"];
+                for (let i = 0; i < latlng.length; i++) {
+                    /* 좌표 최적화 */
+                    if (i % 4 != 0) {
+                        continue;
+                    } else {
+                        let lat = latlng[i]['lat']
+                        let lng = latlng[i]['lng']
+                        /* 좌표를 받아서 path에 push */
+                        path.push(new naver.maps.LatLng(lat, lng),)
+                    }
+                }
+            }
+        })
+    };
+
+    function fast05() {
+        $.ajax({
+            type: "GET",
+            url: "/main/05",
+            data: {},
+            success: function (response) {
+                /*본격적으로 시작히기 전 앞에 선언된 path 리스트 비우기*/
+                path.clear();
+                /* 롤 오버 옵션 적용 */
+                naver.maps.Event.addListener(polyline, 'mouseover', function () {
+                    polyline.setOptions({
+                        strokeColor: '#0800ff',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 0.5,
+                        strokeWeight: 12
+                    });
+                });
+
+                naver.maps.Event.addListener(polyline, 'mouseout', function () {
+                    polyline.setOptions({
+                        strokeColor: '#1acca4',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 1,
+                        strokeWeight: 8
+
+                    });
+                });
+
+                let latlng = response["latlng_all5"];
+                for (let i = 0; i < latlng.length; i++) {
+                    /* 좌표 최적화 */
+                    if (i % 4 != 0) {
+                        continue;
+                    } else {
+                        let lat = latlng[i]['lat']
+                        let lng = latlng[i]['lng']
+                        /* 좌표를 받아서 path에 push */
+                        path.push(new naver.maps.LatLng(lat, lng),)
+                    }
+                }
+            }
+        })
+    };
+
+    function fast06() {
+        $.ajax({
+            type: "GET",
+            url: "/main/06",
+            data: {},
+            success: function (response) {
+                /*본격적으로 시작히기 전 앞에 선언된 path 리스트 비우기*/
+                path.clear();
+                /* 롤 오버 옵션 적용 */
+                naver.maps.Event.addListener(polyline, 'mouseover', function () {
+                    polyline.setOptions({
+                        strokeColor: '#0800ff',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 0.5,
+                        strokeWeight: 12
+                    });
+                });
+
+                naver.maps.Event.addListener(polyline, 'mouseout', function () {
+                    polyline.setOptions({
+                        strokeColor: '#1acca4',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 1,
+                        strokeWeight: 8
+
+                    });
+                });
+
+                let latlng = response["latlng_all6"];
+                for (let i = 0; i < latlng.length; i++) {
+                    /* 좌표 최적화 */
+                    if (i % 4 != 0) {
+                        continue;
+                    } else {
+                        let lat = latlng[i]['lat']
+                        let lng = latlng[i]['lng']
+                        /* 좌표를 받아서 path에 push */
+                        path.push(new naver.maps.LatLng(lat, lng),)
+                    }
+                }
+            }
+        })
+    };
+
+    function fast07() {
+        $.ajax({
+            type: "GET",
+            url: "/main/07",
+            data: {},
+            success: function (response) {
+                /*본격적으로 시작히기 전 앞에 선언된 path 리스트 비우기*/
+                path.clear();
+                /* 롤 오버 옵션 적용 */
+                naver.maps.Event.addListener(polyline, 'mouseover', function () {
+                    polyline.setOptions({
+                        strokeColor: '#0800ff',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 0.5,
+                        strokeWeight: 12
+                    });
+                });
+
+                naver.maps.Event.addListener(polyline, 'mouseout', function () {
+                    polyline.setOptions({
+                        strokeColor: '#1acca4',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 1,
+                        strokeWeight: 8
+
+                    });
+                });
+
+                let latlng = response["latlng_all7"];
+                for (let i = 0; i < latlng.length; i++) {
+                    /* 좌표 최적화 */
+                    if (i % 4 != 0) {
+                        continue;
+                    } else {
+                        let lat = latlng[i]['lat']
+                        let lng = latlng[i]['lng']
+                        /* 좌표를 받아서 path에 push */
+                        path.push(new naver.maps.LatLng(lat, lng),)
+                    }
+                }
+            }
+        })
+    };
+
+    function fast08() {
+        $.ajax({
+            type: "GET",
+            url: "/main/08",
+            data: {},
+            success: function (response) {
+                /*본격적으로 시작히기 전 앞에 선언된 path 리스트 비우기*/
+                path.clear();
+                /* 롤 오버 옵션 적용 */
+                naver.maps.Event.addListener(polyline, 'mouseover', function () {
+                    polyline.setOptions({
+                        strokeColor: '#0800ff',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 0.5,
+                        strokeWeight: 12
+                    });
+                });
+
+                naver.maps.Event.addListener(polyline, 'mouseout', function () {
+                    polyline.setOptions({
+                        strokeColor: '#1acca4',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 1,
+                        strokeWeight: 8
+
+                    });
+                });
+
+                let latlng = response["latlng_all8"];
+                for (let i = 0; i < latlng.length; i++) {
+                    /* 좌표 최적화 */
+                    if (i % 4 != 0) {
+                        continue;
+                    } else {
+                        let lat = latlng[i]['lat']
+                        let lng = latlng[i]['lng']
+                        /* 좌표를 받아서 path에 push */
+                        path.push(new naver.maps.LatLng(lat, lng),)
+                    }
+                }
+            }
+        })
+    };
+
+    function fast09() {
+        $.ajax({
+            type: "GET",
+            url: "/main/09",
+            data: {},
+            success: function (response) {
+                /*본격적으로 시작히기 전 앞에 선언된 path 리스트 비우기*/
+                path.clear();
+                /* 롤 오버 옵션 적용 */
+                naver.maps.Event.addListener(polyline, 'mouseover', function () {
+                    polyline.setOptions({
+                        strokeColor: '#0800ff',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 0.5,
+                        strokeWeight: 12
+                    });
+                });
+
+                naver.maps.Event.addListener(polyline, 'mouseout', function () {
+                    polyline.setOptions({
+                        strokeColor: '#1acca4',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 1,
+                        strokeWeight: 8
+
+                    });
+                });
+
+                let latlng = response["latlng_all9"];
+                for (let i = 0; i < latlng.length; i++) {
+                    /* 좌표 최적화 */
+                    if (i % 4 != 0) {
+                        continue;
+                    } else {
+                        let lat = latlng[i]['lat']
+                        let lng = latlng[i]['lng']
+                        /* 좌표를 받아서 path에 push */
+                        path.push(new naver.maps.LatLng(lat, lng),)
+                    }
+                }
+            }
+        })
+    };
+
+    function fast10() {
+        $.ajax({
+            type: "GET",
+            url: "/main/10",
+            data: {},
+            success: function (response) {
+                /*본격적으로 시작히기 전 앞에 선언된 path 리스트 비우기*/
+                path.clear();
+                /* 롤 오버 옵션 적용 */
+                naver.maps.Event.addListener(polyline, 'mouseover', function () {
+                    polyline.setOptions({
+                        strokeColor: '#0800ff',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 0.5,
+                        strokeWeight: 12
+                    });
+                });
+
+                naver.maps.Event.addListener(polyline, 'mouseout', function () {
+                    polyline.setOptions({
+                        strokeColor: '#1acca4',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 1,
+                        strokeWeight: 8
+
+                    });
+                });
+
+                let latlng = response["latlng_all10"];
+                for (let i = 0; i < latlng.length; i++) {
+                    /* 좌표 최적화 */
+                    if (i % 4 != 0) {
+                        continue;
+                    } else {
+                        let lat = latlng[i]['lat']
+                        let lng = latlng[i]['lng']
+                        /* 좌표를 받아서 path에 push */
+                        path.push(new naver.maps.LatLng(lat, lng),)
+                    }
+                }
+            }
+        })
+    };
+
+    function fast11() {
+        $.ajax({
+            type: "GET",
+            url: "/main/11",
+            data: {},
+            success: function (response) {
+                /*본격적으로 시작히기 전 앞에 선언된 path 리스트 비우기*/
+                path.clear();
+                /* 롤 오버 옵션 적용 */
+                naver.maps.Event.addListener(polyline, 'mouseover', function () {
+                    polyline.setOptions({
+                        strokeColor: '#0800ff',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 0.5,
+                        strokeWeight: 12
+                    });
+                });
+
+                naver.maps.Event.addListener(polyline, 'mouseout', function () {
+                    polyline.setOptions({
+                        strokeColor: '#1acca4',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 1,
+                        strokeWeight: 8
+
+                    });
+                });
+
+                let latlng = response["latlng_all11"];
+                for (let i = 0; i < latlng.length; i++) {
+                    /* 좌표 최적화 */
+                    if (i % 4 != 0) {
+                        continue;
+                    } else {
+                        let lat = latlng[i]['lat']
+                        let lng = latlng[i]['lng']
+                        /* 좌표를 받아서 path에 push */
+                        path.push(new naver.maps.LatLng(lat, lng),)
+                    }
+                }
+            }
+        })
+    };
+
+    function fast12() {
+        $.ajax({
+            type: "GET",
+            url: "/main/12",
+            data: {},
+            success: function (response) {
+                /*본격적으로 시작히기 전 앞에 선언된 path 리스트 비우기*/
+                path.clear();
+                /* 롤 오버 옵션 적용 */
+                naver.maps.Event.addListener(polyline, 'mouseover', function () {
+                    polyline.setOptions({
+                        strokeColor: '#0800ff',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 0.5,
+                        strokeWeight: 12
+                    });
+                });
+
+                naver.maps.Event.addListener(polyline, 'mouseout', function () {
+                    polyline.setOptions({
+                        strokeColor: '#1acca4',
+                        strokeStyle: 'solid',
+                        strokeOpacity: 1,
+                        strokeWeight: 8
+
+                    });
+                });
+
+                let latlng = response["latlng_all12"];
+                for (let i = 0; i < latlng.length; i++) {
+                    /* 좌표 최적화 */
+                    if (i % 4 != 0) {
+                        continue;
+                    } else {
+                        let lat = latlng[i]['lat']
+                        let lng = latlng[i]['lng']
+                        /* 좌표를 받아서 path에 push */
+                        path.push(new naver.maps.LatLng(lat, lng),)
+                    }
+                }
+            }
+        })
+    };
+
+
+
+
+</script>
+</body>
+<!--<footer>-->
+
+<!--    -->
+<!--</footer>-->
