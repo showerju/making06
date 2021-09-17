@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>휴게소를 먹다</title>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            showrecommend();
+        });
+
+        function writerecommend() {
+            let title = $('#title').val()
+            let writer = $('#writer').val()
+            let highway = $('#highway').val()
+            let comment = $('#comment').val()
+            let menu = $('#menu').val()
+
+            $.ajax({
+                type: "POST",
+                url: "/boardnew",
+                data: {title_give: title, writer_give: writer, highway_give: highway, comment_give: comment,menu_give: menu},
+                success: function (response) {
+                    alert(response["msg"]);
+                    window.location.reload();
+                }
+            })
+        }
+
+        function showrecommend() {
+
+            $.ajax({
+                type: "GET",
+                url: "/boardnew",
+                data: {},
+                success: function (response) {
+                    let recommendations = response['all_recommendation']
+                    for (let i = 0; i < recommendations.length; i++) {
+                        let title = recommendations[i]['title']
+                        let comment = recommendations[i]['comment']
+                        let writer = recommendations[i]['writer']
+                        let highway = recommendations[i]['highway']
+                        let menu = recommendations[i]['menu']
+
+                        let temp_html = `<div class="title" style="text-align: center">${title}</a></div>
+                                            <div class="comment" style="">${comment}</div>
+                                            <div class="writer">${writer}</div>
+                                            <div class="date">${highway}</div>
+                                            <div class="count">${menu}</div>`
+
+                        $('#comment-list').append(temp_html)
+                    }
+                }
+            })
+        }
+    </script>
+
+    <style>
+        nav {
+            width: 100%;
+            margin: auto;
+            background: #fff;
+            padding: 0px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #aaa;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: 0 10px;
+        }
+
+        nav ul li a,
+        nav ul li a:after,
+        nav ul li a:before {
+            transition: all .5s;
+        }
+
+        nav ul li a:hover {
+            color: #555;
+        }
+
+
+        /* SHIFT */
+        nav.shift ul li a {
+            position: relative;
+            z-index: 1;
+        }
+
+        nav.shift ul li a:hover {
+            color: #ffffff;
+        }
+
+        nav.shift ul li a:after {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            width: 100%;
+            height: 1px;
+            content: '.';
+            color: transparent;
+            background: #ED1C24;
+            visibility: none;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        nav.shift ul li a:hover:after {
+            opacity: 1;
+            visibility: visible;
+            height: 100%;
+        }
+
+
+        input[type=text] {
+            padding: 1px 1px;
+            margin: auto;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .footer-dark {
+            padding: 50px 0;
+            color: black;
+            background-color: lightgray;
+        }
+
+        .footer-dark h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .footer-dark ul {
+            padding: 0;
+            list-style: none;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .footer-dark ul a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.6;
+        }
+
+        .footer-dark ul a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 767px) {
+            .footer-dark .item:not(.social) {
+                text-align: center;
+                padding-bottom: 20px;
+            }
+        }
+
+        .footer-dark .item.text {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 767px) {
+            .footer-dark .item.text {
+                margin-bottom: 0;
+            }
+        }
+
+        .footer-dark .item.text p {
+            opacity: 0.6;
+            margin-bottom: 0;
+        }
+
+        .footer-dark .item.social > a:hover {
+            opacity: 0.9;
+        }
+
+        .footer-dark .copyright {
+            text-align: center;
+            padding-top: 10px;
+            opacity: 0.3;
+            font-size: 13px;
+            margin-bottom: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        ul, li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .board_wrap {
+            width: 1442px;
+            margin: 100px auto;
+            padding-left: 80px;
+            padding-right: 80px;
+
+        }
+
+        .board_title {
+            margin-bottom: 10px;
+        }
+
+        .board_title strong {
+            font-size: 25px;
+        }
+
+        .board_title p {
+            margin-top: 5px;
+            font-size: 16px;
+        }
+
+        }
+
+        .board_list {
+            width: 100%;
+            border-top: 2px solid #000;
+        }
+
+        .board_list > div {
+            border-bottom: 1px solid #ddd;
+            font-size: 0;
+        }
+
+        .board_list > div.top {
+            border-bottom: 1px solid #999;
+        }
+
+        .board_list > div:last-child {
+            border-bottom: 1px solid #000;
+        }
+
+        .board_list > div > div {
+            display: inline-block;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .board_list > div.top > div {
+            font-weight: 600;
+        }
+
+        .board_list .num {
+            width: 10%;
+        }
+
+        .board_list .title {
+            width: 25%;
+            text-align: left;
+        }
+
+        .board_list .top .title {
+            text-align: center;
+        }
+
+        .board_list .comment {
+            width: 35%;
+            text-align: center;
+        }
+
+        .board_list .writer {
+            width: 10%;
+        }
+
+        .board_list .date {
+            width: 15%;
+        }
+
+        .board_list .count {
+            width: 15%;
+        }
+
+        .board_write {
+            border-top: 2px solid #000;
+        }
+
+        .board_write .title,
+        .board_write .info {
+            padding: 15px;
+        }
+
+        .board_write .info {
+            border-top: 1px dashed #ddd;
+            font-size: 0;
+        }
+
+        .board_write .title dl {
+            font-size: 0;
+        }
+
+        .board_write .info dl {
+            display: inline-block;
+            width: 50%;
+            vertical-align: middle;
+        }
+
+        .board_write .title dt,
+        .board_write .title dd,
+        .board_write .info dt,
+        .board_write .info dd {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 14px;
+        }
+
+        .board_write .title dt,
+        .board_write .info dt {
+            width: 100px;
+        }
+
+        .board_write .title dd {
+            width: calc(100% - 100px);
+        }
+
+        .board_write .title input[type="text"],
+        .board_write .info input[type="text"],
+        .board_write .info input[type="password"] {
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .board_write .title,
+        .board_write .info1 {
+            padding: 15px;
+        }
+
+        .board_write .info1 {
+            border-top: 1px dashed #ddd;
+            border-bottom: 1px solid #000;
+            font-size: 0;
+        }
+
+        .board_write .title dl {
+            font-size: 0;
+        }
+
+        .board_write .info1 dl {
+            display: inline-block;
+            width: 50%;
+            vertical-align: middle;
+        }
+
+        .board_write .title dt,
+        .board_write .title dd,
+        .board_write .info1 dt,
+        .board_write .info1 dd {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 14px;
+        }
+
+        .board_write .title dt,
+        .board_write .info1 dt {
+            width: 100px;
+        }
+
+        .board_write .title dd {
+            width: calc(100% - 100px);
+        }
+
+        .board_write .title input[type="text"],
+        .board_write .info1 input[type="text"],
+        .board_write .info1 input[type="password"] {
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .board_write .title input[type="text"] {
+            width: 80%;
+        }
+
+        .board_write .cont {
+            border-bottom: 1px solid #000;
+        }
+
+        .board_write .cont textarea {
+            display: block;
+            width: 100%;
+            height: 100px;
+            padding: 15px;
+            box-sizing: border-box;
+            border: 0;
+            resize: vertical;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+<section style="position: fixed; width: 1442px; margin: auto; top: 0;left: 0;right: 0; z-index: 999999">
+    <nav class="shift">
+        <div style="float: left; margin-top: 15px; margin-left: 50px; margin-right: 10px"><a href="indexnew.html">
+            <img src="/static/logo.png" width="104" alt="휴먹">
+        </a></div>
+        <ul style="padding-top: 15px">
+            <li><a href="indexnew.html">Home</a></li>
+            <li><a href="boardnew.html">먹거리 제안하기</a></li>
+            <li><a href="introduce_member.html">팀 소개</a></li>
+        </ul>
+        <hr style="width:100%;text-align:left;margin-left:0; margin-bottom: 0">
+    </nav>
+</section>
+
+<section>
+    <div class="board_wrap">
+        <div class="board_title">
+            <strong>먹거리 제안하기</strong>
+            <p>오고가며 마주쳤던 휴게소 먹거리, 마음껏 제안해주세요</p>
+        </div>
+        <div class="board_write_wrap">
+            <div class="board_write">
+                <div class="title" style="padding-bottom: 0;margin-top: 10px">
+                    <dl>
+                        <dt>제목</dt>
+                        <dd><input type="text" placeholder="제목 입력" id="title"></dd>
+                    </dl>
+                </div>
+                <div class="info" style="margin-top: 2px; padding-bottom: 0">
+                    <dl>
+                        <dt>글쓴이</dt>
+                        <dd><input type="text" placeholder="글쓴이 입력" id="writer"></dd>
+                    </dl>
+                </div>
+                <div class="info1">
+                    <dl>
+                        <dt>휴게소</dt>
+                        <dd><input type="text" placeholder="휴게소이름(상/하행)" id="highway"></dd>
+                    </dl>
+                    <dl>
+                        <dt>음식명</dt>
+                        <dd><input type="text" placeholder="음식" id="menu"></dd>
+                    </dl>
+                </div>
+                <div class="cont">
+                    <textarea placeholder="제안주신 음식을 마음껏 뽐내주세요!(30글자 이내)" id="comment"></textarea>
+                </div>
+            </div>
+            <div style="margin: auto; text-align: center;margin-top: 30px;">
+                <button onclick="location.href='indexnew.html'" style="width: 100px" type="button" class="btn btn-outline-danger">취소</button>
+                <button onclick="writerecommend()" style="width: 100px" type="button" class="btn btn-danger">등록</button>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="board_list_wrap" style="margin-top: 50px">
+            <div class="board_list">
+                <div class="top">
+                    <div class="title">제목</div>
+                    <div class="comment">내용</div>
+                    <div class="writer">글쓴이</div>
+                    <div class="date">휴게소</div>
+                    <div class="count">음식</div>
+                </div>
+                <div id="comment-list">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="footer-dark">
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>Service</h3>
+                    <ul>
+                        <li><a href="indexnew.html">홈</a></li>
+                        <li><a href="boardnew.html">먹거리 제안하기</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="introduce_member.html">팀 소개</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 item text">
+                    <h3>달밤코딩조</h3>
+                    <p>2021년 9월 3일 5명의 열정적인 내일배움단 팀원들이 모여 만든 조이다. 전국 모든 휴게소에 대한 데이터를 축적하는 것을 목표로 하고 있으며 매일 밤 목표를 위해 열코를
+                        진행중인 팀이다.</p>
+                </div>
+                <p class="copyright">달밤코딩조 © 2021</p>
+            </div>
+    </footer>
+</div>
+</body>
+<footer>
+
+</footer>
